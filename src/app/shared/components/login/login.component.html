@@ -1,0 +1,12 @@
+<section class="login">
+    
+    <mat-form-field>
+            <input matInput type="text" placeholder="Username" [(ngModel)]="userName">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Password" [(ngModel)]="password">
+    
+    </mat-form-field>
+
+    <button mat-raised-button (click)="submitLogin()"> Login </button>
+</section>
