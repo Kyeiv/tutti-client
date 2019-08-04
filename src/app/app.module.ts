@@ -7,6 +7,8 @@ import { TutorModule } from './tutor/tutor.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedService } from './shared/services/shared.service';
 import { SharedModule } from './shared/shared.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CookieInterceptor } from './shared/services/cookie.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule
   ],
   providers: [
-    SharedService
+    SharedService,
+    { provide: HTTP_INTERCEPTORS, useClass: CookieInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
