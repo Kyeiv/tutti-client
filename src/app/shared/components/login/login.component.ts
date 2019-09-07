@@ -8,19 +8,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
 
-  userName: string;
-  password: string;
+  login: Login = {};
+  register: Register = {};
 
   constructor(
     private http: HttpClient
   ) { }
 
   submitLogin() {
-    this.http.post(`http://localhost:8080/login?username=${this.userName}&password=${this.password}`, {})
-      // this.http.post(`http://localhost:8080/login`, {
-      //   username: this.userName,
-      //   password: this.password
-      // })
+    this.http.post(`http://localhost:8080/login?username=${this.login.username}&password=${this.login.password}`, {})
       .subscribe(
         (res) => {
           console.log('res');
@@ -37,7 +33,36 @@ export class LoginComponent implements OnInit {
       )
   }
 
+  submitRegister() {
+    this.http.post(`http://localhost:8080/register`, this.register)
+      .subscribe(
+        (res) => {
+          console.log('dupa');
+        },
+        (err) => {
+          console.log(err);
+        },
+      )
+  }
+
   ngOnInit() {
   }
 
 }
+
+interface Login {
+  username?: string;
+  password?: string;
+}
+
+interface Register {
+  username?: string;
+  password?: string;
+  authority?: string;
+  city?: string;
+  country?: string;
+  mail?: string;
+  name?: string;
+  surname?: string;
+  phone?: string;
+} 

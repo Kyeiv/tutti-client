@@ -1,12 +1,77 @@
 <section class="login">
-    
-    <mat-form-field>
-            <input matInput type="text" placeholder="Username" [(ngModel)]="userName">
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput type="text" placeholder="Password" [(ngModel)]="password">
-    
-    </mat-form-field>
+    <mat-tab-group>
 
-    <button mat-raised-button (click)="submitLogin()"> Login </button>
+        <mat-tab label="Login">
+
+            <div fxLayout="column" fxLayoutAlign="start stretch">
+                <mat-form-field>
+                    <input matInput type="text" placeholder="Username" [(ngModel)]="login.username">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput type="text" placeholder="Password" [(ngModel)]="login.password">
+                </mat-form-field>
+
+                <button mat-raised-button (click)="submitLogin()"> Login </button>
+            </div>
+
+
+        </mat-tab>
+
+        <mat-tab label="Register">
+            <div fxLayout="column" fxLayoutAlign="start stretch">
+
+                <mat-form-field>
+                    <input matInput type="text" placeholder="Username" [(ngModel)]="register.username">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput type="text" placeholder="Password" [(ngModel)]="register.password">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput type="text" placeholder="Name" [(ngModel)]="register.name">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput type="text" placeholder="Surname" [(ngModel)]="register.surname">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-select placeholder="Role" [(ngModel)]="register.authority">
+                        <mat-option value="STUDENT">
+                            Student
+                        </mat-option>
+                        <mat-option value="TEACHER">
+                            Teacher
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput type="text" placeholder="Country" [(ngModel)]="register.country">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput type="text" placeholder="City" [(ngModel)]="register.city">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput type="text" placeholder="Email" [(ngModel)]="register.mail">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput type="text" placeholder="Phone Number" [(ngModel)]="register.phone">
+                </mat-form-field>
+
+                <button mat-raised-button (click)="submitRegister()"> Register </button>
+            </div>
+
+        </mat-tab>
+
+
+
+    </mat-tab-group>
+
+
 </section>
