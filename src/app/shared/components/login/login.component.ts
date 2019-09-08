@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   submitRegister() {
-    this.http.post(`http://localhost:8080/register`, this.register)
+    this.http.post(`http://localhost:8080/auth/registration`, this.register)
       .subscribe(
         (res) => {
           console.log('dupa');
