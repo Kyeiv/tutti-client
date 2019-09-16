@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
         (res) => {
           console.log('res');
 
-          this.http.get(`http://localhost:8080/api/employees`).subscribe(
+          this.http.get(`http://localhost:8080/api/hello`).subscribe(
             (res) => {
               console.log(res)
             }
