@@ -1,4 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; background: #333; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// @import "./assets/variables";
+// @import "./assets/bootstrap-grid.scss";
+// @import "./assets/bootstrap.scss";
+@import "./assets/stylesheets/bootstrap-grid.min.css";
+
+html,
+body {
+  height: 100%;
+  background: #333;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.login-bg-1 {
+  background-image: url("assets/images/login-bg-1.jpg");
+}
+
+.login-bg-2 {
+  background-image: url("assets/images/login-bg-2.jpg");
+}
+
+.login-bg-3 {
+  background-image: url("assets/images/login-bg-3.jpg");
+}
+
+* {
+  color: white;
+}

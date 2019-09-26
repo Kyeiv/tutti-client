@@ -1,53 +1,121 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+  FormGroupDirective,
+  NgForm
+} from "@angular/forms";
+import { ErrorStateMatcher } from "@angular/material/core";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
-
   login: Login = {};
   register: Register = {};
+  registerForm: FormGroup = null;
+  backgroundIndex: number;
+  bgClass: string;
+  currentTab: number = 0;
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  passwordsMatcher = new RepeatPasswordEStateMatcher();
+
+  constructor(private http: HttpClient, private formBuilder: FormBuilder) {}
 
   submitLogin() {
-    this.http.post(`http://localhost:8080/login?username=${this.login.username}&password=${this.login.password}`, {})
-      .subscribe(
-        (res) => {
-          console.log('res');
-
-          this.http.get(`http://localhost:8080/api/hello`).subscribe(
-            (res) => {
-              console.log(res)
-            }
-          )
-        },
-        (err) => {
-          console.log(err);
-        },
+    this.http
+      .post(
+        `http://localhost:8080/login?username=${this.login.username}&password=${this.login.password}`,
+        {}
       )
+      .subscribe(
+        res => {
+          console.log("res");
+
+          this.http.get(`http://localhost:8080/api/hello`).subscribe(res => {
+            console.log(res);
+          });
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 
   submitRegister() {
-    this.http.post(`http://localhost:8080/auth/registration`, this.register)
+    this.register = this.registerForm.value;
+    delete this.register.confirmPassword;
+
+    this.http
+      .post(`http://localhost:8080/auth/registration`, this.register)
       .subscribe(
-        (res) => {
-          console.log('dupa');
+        res => {
+          this.registerForm.reset();
+          this.currentTab = 0;
+          console.log("dupa");
         },
-        (err) => {
+        err => {
           console.log(err);
-        },
-      )
+        }
+      );
   }
 
   ngOnInit() {
+    this.generateForm();
+    this.backgroundIndex = Math.floor(Math.random() * 3 + 1);
+    this.bgClass = `login-bg-${this.backgroundIndex}`;
+    console.log(this.backgroundIndex);
   }
 
+  private generateForm() {
+    this.registerForm = this.formBuilder.group(
+      {
+        username: [
+          "",
+          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
+        ],
+        password: [
+          "",
+          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
+        ],
+        confirmPassword: [
+          "",
+          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
+        ],
+        name: [
+          "",
+          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
+        ],
+        surname: [
+          "",
+          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
+        ],
+        authority: ["", Validators.compose([Validators.required])],
+        country: [
+          "",
+          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
+        ],
+        city: [
+          "",
+          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
+        ],
+        mail: [
+          "",
+          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
+        ],
+        phone: [
+          "",
+          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
+        ]
+      },
+      { validator: RepeatPasswordValidator }
+    );
+  }
 }
 
 interface Login {
@@ -58,6 +126,7 @@ interface Login {
 interface Register {
   username?: string;
   password?: string;
+  confirmPassword?: string;
   authority?: string;
   city?: string;
   country?: string;
@@ -65,4 +134,23 @@ interface Register {
   name?: string;
   surname?: string;
   phone?: string;
-} 
+}
+
+export class RepeatPasswordEStateMatcher implements ErrorStateMatcher {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    return (
+      control &&
+      control.parent.get("password").value !==
+        control.parent.get("confirmPassword").value
+    );
+  }
+}
+export function RepeatPasswordValidator(group: FormGroup) {
+  const password = group.controls.password.value;
+  const passwordConfirmation = group.controls.confirmPassword.value;
+
+  return password === passwordConfirmation ? null : { passwordsNotEqual: true };
+}

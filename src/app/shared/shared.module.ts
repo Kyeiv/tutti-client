@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
@@ -21,6 +21,7 @@ import { MatSelectModule } from '@angular/material/select'
     CommonModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
 
     MatFormFieldModule,
     MatInputModule,
@@ -34,7 +35,7 @@ import { MatSelectModule } from '@angular/material/select'
     HttpClientModule,
     LoginComponent,
     FormsModule,
-
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
