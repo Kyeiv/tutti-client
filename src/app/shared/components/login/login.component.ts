@@ -9,6 +9,7 @@ import {
   NgForm
 } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
+import { Indicator } from "../indicator/indicator.model";
 
 @Component({
   selector: "app-login",
@@ -22,12 +23,13 @@ export class LoginComponent implements OnInit {
   backgroundIndex: number;
   bgClass: string;
   currentTab: number = 0;
-
+  indicator: Indicator = new Indicator();
   passwordsMatcher = new RepeatPasswordEStateMatcher();
 
   constructor(private http: HttpClient, private formBuilder: FormBuilder) {}
 
   submitLogin() {
+    this.indicator.setBusy(true);
     this.http
       .post(
         `http://localhost:8080/login?username=${this.login.username}&password=${this.login.password}`,
@@ -36,6 +38,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         res => {
           console.log("res");
+          this.indicator.setBusy(false);
 
           this.http.get(`http://localhost:8080/api/hello`).subscribe(res => {
             console.log(res);
@@ -43,7 +46,9 @@ export class LoginComponent implements OnInit {
         },
         err => {
           console.log(err);
-        }
+          this.indicator.setBusy(false);
+        },
+        () => {}
       );
   }
 
@@ -51,15 +56,19 @@ export class LoginComponent implements OnInit {
     this.register = this.registerForm.value;
     delete this.register.confirmPassword;
 
+    this.indicator.setBusy(true);
+
     this.http
       .post(`http://localhost:8080/auth/registration`, this.register)
       .subscribe(
         res => {
           this.registerForm.reset();
           this.currentTab = 0;
+          this.indicator.setBusy(false);
           console.log("dupa");
         },
         err => {
+          this.indicator.setBusy(false);
           console.log(err);
         }
       );

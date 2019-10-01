@@ -1,0 +1,19 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="start center">
+  <div class="logo">Tutti.</div>
+  <div fxFlex></div>
+  <nav mat-tab-nav-bar>
+    <a
+      mat-tab-link
+      *ngFor="let link of navLinks"
+      [routerLink]="link.path"
+      routerLinkActive
+      #rla="routerLinkActive"
+      [active]="rla.isActive"
+    >
+      {{ link.label }}
+    </a>
+  </nav>
+  <div class="user">
+    DummyUser123
+  </div>
+</mat-toolbar>

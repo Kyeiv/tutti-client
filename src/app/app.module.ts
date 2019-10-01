@@ -1,24 +1,22 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { TutorModule } from './tutor/tutor.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedService } from './shared/services/shared.service';
-import { SharedModule } from './shared/shared.module';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { CookieInterceptor } from './shared/services/cookie.interceptor';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { SharedService } from "./shared/services/shared.service";
+import { SharedModule } from "./shared/shared.module";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { CookieInterceptor } from "./shared/services/cookie.interceptor";
+import { TeacherRoutingModule } from "./teacher/teacher-routing.module";
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
+    TeacherRoutingModule,
     AppRoutingModule,
     SharedModule,
-    TutorModule,
     BrowserAnimationsModule
   ],
   providers: [
@@ -27,4 +25,4 @@ import { CookieInterceptor } from './shared/services/cookie.interceptor';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

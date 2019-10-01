@@ -1,0 +1,13 @@
+.indicator {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: none;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  background: rgba(255, 255, 255, 0.7);
+  &.active {
+    display: block;
+  }
+}
