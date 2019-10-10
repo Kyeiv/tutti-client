@@ -10,6 +10,8 @@ import {
 } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
 import { Indicator } from "../indicator/indicator.model";
+import { flatMap, tap, catchError } from "rxjs/operators";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -26,7 +28,11 @@ export class LoginComponent implements OnInit {
   indicator: Indicator = new Indicator();
   passwordsMatcher = new RepeatPasswordEStateMatcher();
 
-  constructor(private http: HttpClient, private formBuilder: FormBuilder) {}
+  constructor(
+    private http: HttpClient,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {}
 
   submitLogin() {
     this.indicator.setBusy(true);
@@ -35,21 +41,23 @@ export class LoginComponent implements OnInit {
         `http://localhost:8080/login?username=${this.login.username}&password=${this.login.password}`,
         {}
       )
-      .subscribe(
-        res => {
-          console.log("res");
+      .pipe(
+        flatMap(() => this.http.get(`http://localhost:8080/auth/whoami`)),
+        tap(res => sessionStorage.setItem("principal", JSON.stringify(res))),
+        tap(res => {
+          this.router.navigate([
+            ((res as any).authorities[0].authority as string).toLowerCase()
+          ]);
           this.indicator.setBusy(false);
-
-          this.http.get(`http://localhost:8080/api/hello`).subscribe(res => {
-            console.log(res);
-          });
-        },
-        err => {
-          console.log(err);
+          this.login = {};
+        }),
+        catchError((err, caught) => {
           this.indicator.setBusy(false);
-        },
-        () => {}
-      );
+          alert(":CCCCCCCCC");
+          throw caught;
+        })
+      )
+      .subscribe();
   }
 
   submitRegister() {
@@ -65,7 +73,6 @@ export class LoginComponent implements OnInit {
           this.registerForm.reset();
           this.currentTab = 0;
           this.indicator.setBusy(false);
-          console.log("dupa");
         },
         err => {
           this.indicator.setBusy(false);

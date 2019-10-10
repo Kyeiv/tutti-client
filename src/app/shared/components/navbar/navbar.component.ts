@@ -7,6 +7,7 @@ import { NavLink } from "./NavLink";
   styleUrls: ["./navbar.component.scss"]
 })
 export class NavbarComponent implements OnInit {
+  username: string;
   constructor() {}
 
   @Input()
@@ -14,5 +15,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.navLinks);
+    const principal = JSON.parse(sessionStorage.getItem("principal"));
+    this.username = principal.principal.username;
   }
 }
