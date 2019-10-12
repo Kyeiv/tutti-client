@@ -1,13 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormControl,
-  FormGroupDirective,
-  NgForm
-} from "@angular/forms";
+import { FormGroup, FormBuilder, Validators, FormControl, FormGroupDirective, NgForm } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
 import { Indicator } from "../indicator/indicator.model";
 import { flatMap, tap, catchError } from "rxjs/operators";
@@ -28,26 +21,17 @@ export class LoginComponent implements OnInit {
   indicator: Indicator = new Indicator();
   passwordsMatcher = new RepeatPasswordEStateMatcher();
 
-  constructor(
-    private http: HttpClient,
-    private formBuilder: FormBuilder,
-    private router: Router
-  ) {}
+  constructor(private http: HttpClient, private formBuilder: FormBuilder, private router: Router) {}
 
   submitLogin() {
     this.indicator.setBusy(true);
     this.http
-      .post(
-        `http://localhost:8080/login?username=${this.login.username}&password=${this.login.password}`,
-        {}
-      )
+      .post(`http://localhost:8080/login?username=${this.login.username}&password=${this.login.password}`, {})
       .pipe(
         flatMap(() => this.http.get(`http://localhost:8080/auth/whoami`)),
         tap(res => sessionStorage.setItem("principal", JSON.stringify(res))),
         tap(res => {
-          this.router.navigate([
-            ((res as any).authorities[0].authority as string).toLowerCase()
-          ]);
+          this.router.navigate([((res as any).authorities[0].authority as string).toLowerCase()]);
           this.indicator.setBusy(false);
           this.login = {};
         }),
@@ -66,19 +50,17 @@ export class LoginComponent implements OnInit {
 
     this.indicator.setBusy(true);
 
-    this.http
-      .post(`http://localhost:8080/auth/registration`, this.register)
-      .subscribe(
-        res => {
-          this.registerForm.reset();
-          this.currentTab = 0;
-          this.indicator.setBusy(false);
-        },
-        err => {
-          this.indicator.setBusy(false);
-          console.log(err);
-        }
-      );
+    this.http.post(`http://localhost:8080/auth/registration`, this.register).subscribe(
+      res => {
+        this.registerForm.reset();
+        this.currentTab = 0;
+        this.indicator.setBusy(false);
+      },
+      err => {
+        this.indicator.setBusy(false);
+        console.log(err);
+      }
+    );
   }
 
   ngOnInit() {
@@ -91,43 +73,16 @@ export class LoginComponent implements OnInit {
   private generateForm() {
     this.registerForm = this.formBuilder.group(
       {
-        username: [
-          "",
-          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
-        ],
-        password: [
-          "",
-          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
-        ],
-        confirmPassword: [
-          "",
-          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
-        ],
-        name: [
-          "",
-          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
-        ],
-        surname: [
-          "",
-          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
-        ],
+        username: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
+        password: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
+        confirmPassword: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
+        name: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
+        surname: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
         authority: ["", Validators.compose([Validators.required])],
-        country: [
-          "",
-          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
-        ],
-        city: [
-          "",
-          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
-        ],
-        mail: [
-          "",
-          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
-        ],
-        phone: [
-          "",
-          Validators.compose([Validators.required, Validators.pattern(/\w*/)])
-        ]
+        country: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
+        city: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
+        mail: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
+        phone: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])]
       },
       { validator: RepeatPasswordValidator }
     );
@@ -153,15 +108,8 @@ interface Register {
 }
 
 export class RepeatPasswordEStateMatcher implements ErrorStateMatcher {
-  isErrorState(
-    control: FormControl | null,
-    form: FormGroupDirective | NgForm | null
-  ): boolean {
-    return (
-      control &&
-      control.parent.get("password").value !==
-        control.parent.get("confirmPassword").value
-    );
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    return control && control.parent.get("password").value !== control.parent.get("confirmPassword").value;
   }
 }
 export function RepeatPasswordValidator(group: FormGroup) {

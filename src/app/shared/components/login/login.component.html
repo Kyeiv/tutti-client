@@ -10,40 +10,21 @@
           <mat-tab label="Login">
             <div fxLayout="column" fxLayoutAlign="start stretch">
               <mat-form-field>
-                <input
-                  matInput
-                  type="text"
-                  placeholder="Username"
-                  [(ngModel)]="login.username"
-                />
+                <input matInput type="text" placeholder="Username" [(ngModel)]="login.username" />
               </mat-form-field>
 
               <mat-form-field>
-                <input
-                  matInput
-                  type="password"
-                  placeholder="Password"
-                  [(ngModel)]="login.password"
-                />
+                <input matInput type="password" placeholder="Password" [(ngModel)]="login.password" />
               </mat-form-field>
 
-              <button mat-raised-button (click)="submitLogin()">Login</button>
+              <button color="primary" mat-raised-button (click)="submitLogin()">Login</button>
             </div>
           </mat-tab>
 
           <mat-tab label="Register">
-            <div
-              fxLayout="column"
-              fxLayoutAlign="start stretch"
-              [formGroup]="registerForm"
-            >
+            <div fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="registerForm">
               <mat-form-field>
-                <input
-                  matInput
-                  type="text"
-                  placeholder="Username"
-                  formControlName="username"
-                />
+                <input matInput type="text" placeholder="Username" formControlName="username" />
               </mat-form-field>
 
               <mat-form-field>
@@ -67,21 +48,11 @@
               </mat-form-field>
 
               <mat-form-field>
-                <input
-                  matInput
-                  type="text"
-                  placeholder="Name"
-                  formControlName="name"
-                />
+                <input matInput type="text" placeholder="Name" formControlName="name" />
               </mat-form-field>
 
               <mat-form-field>
-                <input
-                  matInput
-                  type="text"
-                  placeholder="Surname"
-                  formControlName="surname"
-                />
+                <input matInput type="text" placeholder="Surname" formControlName="surname" />
               </mat-form-field>
 
               <mat-form-field>
@@ -96,46 +67,22 @@
               </mat-form-field>
 
               <mat-form-field>
-                <input
-                  matInput
-                  type="text"
-                  placeholder="Country"
-                  formControlName="country"
-                />
+                <input matInput type="text" placeholder="Country" formControlName="country" />
               </mat-form-field>
 
               <mat-form-field>
-                <input
-                  matInput
-                  type="text"
-                  placeholder="City"
-                  formControlName="city"
-                />
+                <input matInput type="text" placeholder="City" formControlName="city" />
               </mat-form-field>
 
               <mat-form-field>
-                <input
-                  matInput
-                  type="text"
-                  placeholder="Email"
-                  formControlName="mail"
-                />
+                <input matInput type="text" placeholder="Email" formControlName="mail" />
               </mat-form-field>
 
               <mat-form-field>
-                <input
-                  matInput
-                  type="text"
-                  placeholder="Phone Number"
-                  formControlName="phone"
-                />
+                <input matInput type="text" placeholder="Phone Number" formControlName="phone" />
               </mat-form-field>
 
-              <button
-                [disabled]="registerForm.invalid"
-                mat-raised-button
-                (click)="submitRegister()"
-              >
+              <button color="primary" [disabled]="registerForm.invalid" mat-raised-button (click)="submitRegister()">
                 Register
               </button>
             </div>

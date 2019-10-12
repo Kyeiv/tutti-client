@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <indicator [indicator]="indicator"> </indicator>
+      <div *ngIf="detailsForm" fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="detailsForm">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Name" formControlName="name" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Surname" formControlName="surname" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Country" formControlName="country" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="City" formControlName="city" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Email" formControlName="mail" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Phone Number" formControlName="phone" />
+        </mat-form-field>
+
+        <button
+          color="primary"
+          [disabled]="detailsForm.invalid || !canSave"
+          mat-raised-button
+          (click)="submitDetails()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

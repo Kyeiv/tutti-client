@@ -12,7 +12,7 @@ export class TeacherComponent implements OnInit {
   navLinks: NavLink[] = [
     { label: "Appointments", path: "appointments" },
     { label: "Blog", path: "blog" },
-    { label: "My profile", path: "myprofile" }
+    { label: "My profile", path: "my-profile" }
   ];
 
   ngOnInit() {}

@@ -17,10 +17,22 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { RouterModule } from "@angular/router";
 import { NavbarComponent } from "./components/navbar/navbar.component";
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserProfileComponent } from "./user-profile/user-profile.component";
+import { DetailsComponent } from "./user-profile/details/details.component";
+import { SpecializationsComponent } from "./user-profile/specializations/specializations.component";
+import { AvailbilityComponent } from "./user-profile/availbility/availbility.component";
+import { UserProfileService } from "./user-profile/user-profile.service";
 
 @NgModule({
-  declarations: [LoginComponent, IndicatorComponent, NavbarComponent, UserProfileComponent],
+  declarations: [
+    LoginComponent,
+    IndicatorComponent,
+    NavbarComponent,
+    UserProfileComponent,
+    DetailsComponent,
+    SpecializationsComponent,
+    AvailbilityComponent
+  ],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -53,7 +65,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     MatProgressSpinnerModule,
     MatToolbarModule,
     RouterModule,
-    NavbarComponent
-  ]
+    NavbarComponent,
+    UserProfileComponent
+  ],
+  providers: [UserProfileService]
 })
 export class SharedModule {}
