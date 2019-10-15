@@ -22,6 +22,8 @@ import { DetailsComponent } from "./user-profile/details/details.component";
 import { SpecializationsComponent } from "./user-profile/specializations/specializations.component";
 import { AvailbilityComponent } from "./user-profile/availbility/availbility.component";
 import { UserProfileService } from "./user-profile/user-profile.service";
+import { MatIconModule } from "@angular/material/icon";
+import { MatTableModule } from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { UserProfileService } from "./user-profile/user-profile.service";
     MatSelectModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
-    RouterModule
+    RouterModule,
+    MatIconModule,
+    MatTableModule
   ],
   exports: [
     CommonModule,
@@ -66,7 +70,9 @@ import { UserProfileService } from "./user-profile/user-profile.service";
     MatToolbarModule,
     RouterModule,
     NavbarComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    MatIconModule,
+    MatTableModule
   ],
   providers: [UserProfileService]
 })
