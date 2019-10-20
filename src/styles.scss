@@ -43,3 +43,16 @@ body {
   position: relative;
   box-sizing: border-box;
 }
+
+.clock-control {
+  background-color: transparent;
+  color: white;
+  border: 0;
+  outline: 0;
+}
+
+ngx-material-timepicker-container {
+  --clock-hand-color: #7b1fa2 !important;
+  --dial-background-color: #7b1fa2 !important;
+  --body-background-color: #333 !important;
+}

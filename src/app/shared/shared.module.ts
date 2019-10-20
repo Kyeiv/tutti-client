@@ -24,6 +24,7 @@ import { AvailbilityComponent } from "./user-profile/availbility/availbility.com
 import { UserProfileService } from "./user-profile/user-profile.service";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from "@angular/material/table";
+import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { MatTableModule } from "@angular/material/table";
     MatToolbarModule,
     RouterModule,
     MatIconModule,
-    MatTableModule
+    MatTableModule,
+    NgxMaterialTimepickerModule
   ],
   exports: [
     CommonModule,
@@ -72,7 +74,8 @@ import { MatTableModule } from "@angular/material/table";
     NavbarComponent,
     UserProfileComponent,
     MatIconModule,
-    MatTableModule
+    MatTableModule,
+    NgxMaterialTimepickerModule
   ],
   providers: [UserProfileService]
 })
