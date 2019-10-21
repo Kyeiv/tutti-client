@@ -6,6 +6,7 @@ import { UserProfileComponent } from "../shared/user-profile/user-profile.compon
 import { DetailsComponent } from "../shared/user-profile/details/details.component";
 import { SpecializationsComponent } from "../shared/user-profile/specializations/specializations.component";
 import { AvailbilityComponent } from "../shared/user-profile/availbility/availbility.component";
+import { blogRoutes } from "../blog/blog.module";
 
 const routes: Routes = [
   {
@@ -32,7 +33,8 @@ const routes: Routes = [
             redirectTo: "details"
           }
         ]
-      }
+      },
+      ...blogRoutes
     ],
     component: TeacherComponent,
     canActivate: [AuthGuard],

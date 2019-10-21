@@ -12,17 +12,8 @@ import { TeacherRoutingModule } from "./teacher/teacher-routing.module";
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    TeacherRoutingModule,
-    AppRoutingModule,
-    SharedModule,
-    BrowserAnimationsModule
-  ],
-  providers: [
-    SharedService,
-    { provide: HTTP_INTERCEPTORS, useClass: CookieInterceptor, multi: true }
-  ],
+  imports: [BrowserModule, TeacherRoutingModule, AppRoutingModule, SharedModule, BrowserAnimationsModule],
+  providers: [SharedService, { provide: HTTP_INTERCEPTORS, useClass: CookieInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NavLink } from "../shared/components/navbar/NavLink";
+import { teacherNavlinks } from "../shared/classes/navlinks";
 
 @Component({
   selector: "app-teacher",
@@ -9,11 +10,7 @@ import { NavLink } from "../shared/components/navbar/NavLink";
 export class TeacherComponent implements OnInit {
   constructor() {}
 
-  navLinks: NavLink[] = [
-    { label: "Appointments", path: "appointments" },
-    { label: "Blog", path: "blog" },
-    { label: "My profile", path: "my-profile" }
-  ];
+  navLinks: NavLink[] = teacherNavlinks;
 
   ngOnInit() {}
 }
