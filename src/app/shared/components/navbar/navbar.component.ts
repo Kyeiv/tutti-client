@@ -15,7 +15,8 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.navLinks);
-    const principal = JSON.parse(sessionStorage.getItem("principal"));
-    this.username = principal.principal.username;
+    const username = sessionStorage.getItem('username');
+    this.username = username;
+    
   }
 }

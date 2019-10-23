@@ -1,0 +1,15 @@
+.article-edit {
+  position: relative;
+  height: calc(100vh - 83px);
+  padding: 15px;
+  .article-title {
+    margin-bottom: 15px;
+
+    .save-article-button {
+      font-size: 25px;
+    }
+  }
+  footer {
+    padding-top: 15px;
+  }
+}

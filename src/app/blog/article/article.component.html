@@ -1,1 +1,23 @@
-<p>article works!</p>
+<section class="container" style="position: relative;">
+  <indicator [indicator]="indicator"> </indicator>
+  <div class="row">
+    <div class="col-12">
+      <article class="article mat-elevation-z8">
+        <header fxLayout="column">
+          <h1 class="article-title" color="primary">
+            {{ article.title }}
+          </h1>
+          <time class="article-date">
+            {{ article.createdAt | date }}
+          </time>
+        </header>
+        <section class="article-content" [innerHTML]="article.content"></section>
+        <footer class="article-footer" fxLayout="row" fxLayoutAlign="end center">
+          <button mat-raised-button color="primary" [routerLink]="'../..'">Return</button>
+          <button mat-raised-button color="primary" [routerLink]="'../../edit/' + article.id">Edit</button>
+          <button mat-raised-button color="primary" (click)="onDelete(article.id)">Delete</button>
+        </footer>
+      </article>
+    </div>
+  </div>
+</section>

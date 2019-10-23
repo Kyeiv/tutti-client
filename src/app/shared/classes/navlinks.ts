@@ -1,6 +1,6 @@
-export const teacherNavlinks = [
+export const teacherNavlinks = (username: string) => [
   { label: "Appointments", path: "appointments" },
-  { label: "Blog", path: "blog/ada" },
+  { label: "Blog", path: `blog/${username}` },
   { label: "My profile", path: "my-profile" }
 ];
 

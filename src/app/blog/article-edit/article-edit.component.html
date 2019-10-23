@@ -1,1 +1,35 @@
-<p>article-edit works!</p>
+<article class="article article-edit full-height" fxFlex fxLayout="column" fxLayoutAlign="start stretch">
+  <indicator [indicator]="indicator"> </indicator>
+  <header class="article-title" fxLayout="row">
+    <div style="margin-right: 15px" fxLayout="column" fxLayoutAlign="start center">
+      <button class="save-article-button" fxFlex mat-raised-button color="primary" (click)="location.back()">
+        <mat-icon>undo</mat-icon>
+      </button>
+    </div>
+    <mat-form-field class="no-padding" fxFlex appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput type="text" placeholder="Enter title..." [(ngModel)]="article.title" />
+    </mat-form-field>
+    <div style="margin-left: 15px" fxLayout="column" fxLayoutAlign="start center">
+      <button
+        class="save-article-button"
+        fxFlex
+        mat-raised-button
+        color="primary"
+        [disabled]="!article.title || !article.content"
+        (click)="onSave()"
+      >
+        <mat-icon>save</mat-icon> Save
+      </button>
+    </div>
+  </header>
+  <section class="article-body" fxFlex="grow">
+    <angular-editor
+      fxFlex
+      fxLayout="column"
+      fxLayoutAlign="start stretch"
+      [(ngModel)]="article.content"
+      [config]="editorConfig"
+    ></angular-editor>
+  </section>
+</article>

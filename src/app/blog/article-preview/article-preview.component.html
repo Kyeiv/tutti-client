@@ -1,4 +1,36 @@
-<p>article-preview works!</p>
-<button color="primary" mat-raised-button routerLink="../add">
-  Add
-</button>
+<section class="container" style="position: relative;">
+  <indicator [indicator]="indicator"> </indicator>
+  <div class="row" fxLayout="row">
+    <div class="col-12">
+      <header fxLayout="row" fxLayoutAlign="start center">
+        <h1>{{ userId }}'s Articles</h1>
+        <div fxFlex></div>
+        <div>
+          <button color="primary" mat-raised-button routerLink="../add">
+            Write new
+          </button>
+        </div>
+      </header>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <article class="article mat-elevation-z8" *ngFor="let article of articles">
+        <header fxLayout="column">
+          <h1 class="article-title" color="primary">
+            {{ article.title }}
+          </h1>
+          <time class="article-date">
+            {{ article.createdAt | date }}
+          </time>
+        </header>
+        <section class="article-content" [innerHTML]="article.content | slice: 0:500"></section>
+        <footer class="article-footer" fxLayout="row" fxLayoutAlign="end center">
+          <button mat-raised-button color="primary" [routerLink]="'../article/' + article.id">Read more</button>
+          <button mat-raised-button color="primary" [routerLink]="'../edit/' + article.id">Edit</button>
+          <button mat-raised-button color="primary" (click)="onDelete(article.id)">Delete</button>
+        </footer>
+      </article>
+    </div>
+  </div>
+</section>

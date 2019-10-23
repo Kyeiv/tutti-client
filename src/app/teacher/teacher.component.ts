@@ -10,7 +10,10 @@ import { teacherNavlinks } from "../shared/classes/navlinks";
 export class TeacherComponent implements OnInit {
   constructor() {}
 
-  navLinks: NavLink[] = teacherNavlinks;
+  navLinks: NavLink[] = [];
 
-  ngOnInit() {}
+  ngOnInit() {
+    const username = sessionStorage.getItem('username');
+    this.navLinks = teacherNavlinks(username);
+  }
 }

@@ -43,6 +43,11 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     }
 
     const principal = JSON.parse(sessionStorage.getItem("principal"));
+
+    if (principal && principal.principal) {
+       sessionStorage.setItem('username', principal.principal.username);
+    }
+
     if (
       !url.startsWith(`/${principal.authorities[0].authority.toLowerCase()}`)
     ) {

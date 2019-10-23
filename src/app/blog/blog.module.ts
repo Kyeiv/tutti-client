@@ -7,6 +7,7 @@ import { ArticleEditComponent } from "./article-edit/article-edit.component";
 import { ArticlePreviewComponent } from "./article-preview/article-preview.component";
 import { SharedModule } from "../shared/shared.module";
 import { Routes } from "@angular/router";
+import { AngularEditorModule } from "@kolkov/angular-editor";
 
 export const blogRoutes: Routes = [
   {
@@ -24,6 +25,6 @@ export const blogRoutes: Routes = [
 
 @NgModule({
   declarations: [BlogComponent, ArticleComponent, ArticleEditComponent, ArticlePreviewComponent],
-  imports: [CommonModule, SharedModule]
+  imports: [CommonModule, SharedModule, AngularEditorModule]
 })
 export class BlogModule {}
