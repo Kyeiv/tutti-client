@@ -47,7 +47,7 @@ export class SpecializationsComponent implements OnInit {
   public getSpecializations() {
     this.http.get(`http://localhost:8080/api/specializations`).subscribe(
       res => {
-        this.dataSource = (res as any).specializations;
+        this.dataSource = (res as any).payload;
       },
       err => console.log(err)
     );
@@ -66,7 +66,7 @@ export class SpecializationsComponent implements OnInit {
         res => {
           element.isEdit = false;
           element.isNew = false;
-          element.id = (res as any).elementId;
+          element.id = (res as any).payload;
         },
         err => console.log(err)
       );

@@ -13,7 +13,7 @@ export class UserProfileService {
   public getUserDetails() {
     this.http.get(`http://localhost:8080/api/user-details`).subscribe(
       res => {
-        this.detailsSource.next((res as any).userDetails);
+        this.detailsSource.next((res as any).payload);
       },
       err => {
         console.log(err);

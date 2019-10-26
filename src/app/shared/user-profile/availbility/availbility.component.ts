@@ -54,11 +54,11 @@ export class AvailbilityComponent implements OnInit {
   public getAvailbilities() {
     this.http.get(`http://localhost:8080/api/availbilities`).subscribe(
       res => {
-        (res as any).availbilities.forEach((avaibility: Availbility) => {
+        (res as any).payload.forEach((avaibility: Availbility) => {
           avaibility.hourBegin = avaibility.hourBegin.substr(0, avaibility.hourBegin.lastIndexOf(":"));
           avaibility.hourEnd = avaibility.hourEnd.substr(0, avaibility.hourEnd.lastIndexOf(":"));
         });
-        this.dataSource = (res as any).availbilities;
+        this.dataSource = (res as any).payload;
       },
       err => console.log(err)
     );
@@ -77,7 +77,7 @@ export class AvailbilityComponent implements OnInit {
         res => {
           element.isEdit = false;
           element.isNew = false;
-          element.id = (res as any).elementId;
+          element.id = (res as any).payload;
         },
         err => console.log(err)
       );
