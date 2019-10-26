@@ -95,7 +95,7 @@ export class ArticleEditComponent implements OnInit {
       this.indicator.setBusy(true);
       this.http.get(`http://localhost:8080/api/post/${articleId}`).subscribe(
         res => {
-          this.article = (res as any).postRequest;
+          this.article = (res as any).postData;
           this.indicator.setBusy(false);
         },
         err => {
