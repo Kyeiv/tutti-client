@@ -5,6 +5,7 @@ import { AuthGuard } from "../shared/auth.guard";
 import { UserProfileComponent } from "../shared/user-profile/user-profile.component";
 import { DetailsComponent } from "../shared/user-profile/details/details.component";
 import { blogRoutes } from "../blog/blog.module";
+import { appointmentsRoutes } from "../appointments/appointments-routing.module";
 
 const routes: Routes = [
   {
@@ -24,7 +25,9 @@ const routes: Routes = [
           }
         ]
       },
-      ...blogRoutes
+      ...blogRoutes,
+      ...appointmentsRoutes,
+      { path: "**", redirectTo: "appointments" }
     ],
     component: StudentComponent,
     canActivate: [AuthGuard],

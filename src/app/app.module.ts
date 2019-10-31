@@ -9,8 +9,8 @@ import { SharedModule } from "./shared/shared.module";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { CookieInterceptor } from "./shared/services/cookie.interceptor";
 import { TeacherRoutingModule } from "./teacher/teacher-routing.module";
-import { StudentModule } from "./student/student.module";
 import { StudentRoutingModule } from "./student/student-routing.module";
+import { AppointmentsRoutingModule } from "./appointments/appointments-routing.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +18,7 @@ import { StudentRoutingModule } from "./student/student-routing.module";
     BrowserModule,
     TeacherRoutingModule,
     StudentRoutingModule,
+    AppointmentsRoutingModule,
     AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule

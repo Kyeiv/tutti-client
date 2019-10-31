@@ -7,6 +7,7 @@ import { DetailsComponent } from "../shared/user-profile/details/details.compone
 import { SpecializationsComponent } from "../shared/user-profile/specializations/specializations.component";
 import { AvailbilityComponent } from "../shared/user-profile/availbility/availbility.component";
 import { blogRoutes } from "../blog/blog.module";
+import { appointmentsRoutes } from "../appointments/appointments-routing.module";
 
 const routes: Routes = [
   {
@@ -34,7 +35,9 @@ const routes: Routes = [
           }
         ]
       },
-      ...blogRoutes
+      ...blogRoutes,
+      ...appointmentsRoutes,
+      { path: "**", redirectTo: "appointments" }
     ],
     component: TeacherComponent,
     canActivate: [AuthGuard],
