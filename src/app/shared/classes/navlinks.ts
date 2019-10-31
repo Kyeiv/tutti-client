@@ -6,6 +6,5 @@ export const teacherNavlinks = (username: string) => [
 
 export const studentNavlinks = [
   { label: "Appointments", path: "appointments" },
-  { label: "Blog", path: "blog" },
   { label: "My profile", path: "my-profile" }
 ];

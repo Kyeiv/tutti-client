@@ -10,11 +10,23 @@ import { UserProfileService } from "./user-profile.service";
 export class UserProfileComponent implements OnInit {
   constructor(private userProfileService: UserProfileService) {}
 
-  navLinks: NavLink[] = [
-    { label: "Details", path: "details" },
-    { label: "Specializations", path: "specializations" },
-    { label: "Availbility", path: "availbility" }
-  ];
+  navLinks: NavLink[];
 
-  ngOnInit() {}
+  ngOnInit() {
+    const principal = JSON.parse(sessionStorage.getItem("principal"));
+    const authority = principal.authorities[0].authority.toLowerCase();
+
+    switch (authority) {
+      case "teacher":
+        this.navLinks = [
+          { label: "Details", path: "details" },
+          { label: "Specializations", path: "specializations" },
+          { label: "Availbility", path: "availbility" }
+        ];
+        break;
+      case "student":
+        this.navLinks = [{ label: "Details", path: "details" }];
+        break;
+    }
+  }
 }
