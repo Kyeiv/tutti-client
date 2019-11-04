@@ -17,7 +17,7 @@ export class AppointmentsComponent implements OnInit {
 
     switch (authority) {
       case "student":
-        this.navLinks = [{ label: "My Appointments", path: "my-appointments" }, { label: "search", path: "search" }];
+        this.navLinks = [{ label: "My Appointments", path: "my-appointments" }, { label: "Search", path: "search" }];
         break;
       case "teacher":
         this.navLinks = [{ label: "My Appointments", path: "my-appointments" }];

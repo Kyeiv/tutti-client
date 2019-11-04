@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { LEVELS } from "../../classes/specialization-levels.enum";
+import { NAMES } from "../../classes/specialization-names.enum";
 
 @Component({
   selector: "app-specializations",
@@ -83,16 +85,4 @@ export interface Specialization {
   isEdit?: boolean;
   isNew?: boolean;
   id?: number;
-}
-
-export enum LEVELS {
-  PRIMARY_SCHOOL = "Primary school",
-  HIGH_SCHOOL = "High school",
-  UNIVERSITY = "University"
-}
-
-export enum NAMES {
-  HUMANITIES = "Humanities",
-  SCIENCE = "Science",
-  ENGLISH = "English"
 }
