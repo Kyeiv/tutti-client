@@ -26,7 +26,10 @@ const routes: Routes = [
         ]
       },
       ...blogRoutes,
-      ...appointmentsRoutes,
+      {
+        path: "appointments",
+        loadChildren: () => import("../appointments/appointments.module").then(mod => mod.AppointmentsModule)
+      },
       { path: "**", redirectTo: "appointments" }
     ],
     component: StudentComponent,

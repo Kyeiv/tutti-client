@@ -4,6 +4,9 @@ import { NAMES } from "src/app/shared/classes/specialization-names.enum";
 import { HttpClient } from "@angular/common/http";
 import { UserDetails } from "src/app/shared/user-profile/user-profile.service";
 import { ReplaySubject } from "rxjs";
+import { MatDialog } from "@angular/material/dialog";
+import { MakeAppointemntDialogComponent } from "./make-appointemnt-dialog/make-appointemnt-dialog.component";
+import { UserBasicInfo } from "./make-appointemnt-dialog/classes/user-basic-info";
 
 @Component({
   selector: "app-search-teachers",
@@ -11,7 +14,7 @@ import { ReplaySubject } from "rxjs";
   styleUrls: ["./search-teachers.component.scss"]
 })
 export class SearchTeachersComponent implements OnInit {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private dialog: MatDialog) {}
   query: SearchQuery = {};
   teachers$: ReplaySubject<UserBasicInfo[]> = new ReplaySubject();
   public levels: LEVELS[] = [LEVELS.PRIMARY_SCHOOL, LEVELS.HIGH_SCHOOL, LEVELS.UNIVERSITY];
@@ -40,17 +43,13 @@ export class SearchTeachersComponent implements OnInit {
     );
   }
 
-  public makeAppointment(element) {}
+  public makeAppointment(element) {
+    this.dialog.open(MakeAppointemntDialogComponent, { data: element });
+  }
 }
 
 export interface SearchQuery {
   city?: string;
   level?: LEVELS;
   specializationName?: NAMES;
-}
-
-export interface UserBasicInfo {
-  name: string;
-  surname: string;
-  username: string;
 }

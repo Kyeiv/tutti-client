@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Appointment for {{ data.name }} {{ data.surname }}</h1>
+<div mat-dialog-content>
+  <p>Select preferred date</p>
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link *ngFor="let date of dates" (click)="onTabSelected(date)" [active]="date.isActive">
+      {{ date.date.toDate() | date }}
+    </a>
+  </nav>
+</div>
+<div mat-dialog-actions>
+  <button mat-button cdkFocusInitial (click)="onNoClick()">No Thanks</button>
+  <button mat-button>Ok</button>
+</div>

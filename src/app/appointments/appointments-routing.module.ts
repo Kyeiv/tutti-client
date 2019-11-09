@@ -7,7 +7,7 @@ import { MyAppointmentsComponent } from "./my-appointments/my-appointments.compo
 export const appointmentsRoutes: Routes = [
   {
     component: AppointmentsComponent,
-    path: "appointments",
+    path: "",
     children: [
       { path: "search", component: SearchTeachersComponent },
       { path: "my-appointments", component: MyAppointmentsComponent },
@@ -17,7 +17,7 @@ export const appointmentsRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild([])],
+  imports: [RouterModule.forChild(appointmentsRoutes)],
   exports: [RouterModule]
 })
 export class AppointmentsRoutingModule {}

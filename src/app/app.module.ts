@@ -11,6 +11,7 @@ import { CookieInterceptor } from "./shared/services/cookie.interceptor";
 import { TeacherRoutingModule } from "./teacher/teacher-routing.module";
 import { StudentRoutingModule } from "./student/student-routing.module";
 import { AppointmentsRoutingModule } from "./appointments/appointments-routing.module";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,10 +19,11 @@ import { AppointmentsRoutingModule } from "./appointments/appointments-routing.m
     BrowserModule,
     TeacherRoutingModule,
     StudentRoutingModule,
-    AppointmentsRoutingModule,
+    // AppointmentsRoutingModule,
     AppRoutingModule,
     SharedModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [SharedService, { provide: HTTP_INTERCEPTORS, useClass: CookieInterceptor, multi: true }],
   bootstrap: [AppComponent]
