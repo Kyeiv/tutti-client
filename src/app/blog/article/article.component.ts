@@ -12,6 +12,7 @@ import { Article } from "../classes/article";
 export class ArticleComponent implements OnInit {
   indicator: Indicator = new Indicator();
   article: Article = {};
+  isAuthor: boolean = false;
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
@@ -22,6 +23,7 @@ export class ArticleComponent implements OnInit {
         res => {
           this.article = (res as any).payload;
           this.indicator.setBusy(false);
+          this.isAuthor = this.article.username == sessionStorage.getItem("username");
         },
         err => {
           console.log(err);

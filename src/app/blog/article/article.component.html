@@ -14,8 +14,10 @@
         <section class="article-content" [innerHTML]="article.content"></section>
         <footer class="article-footer" fxLayout="row" fxLayoutAlign="end center">
           <button mat-raised-button color="primary" [routerLink]="'../..'">Return</button>
-          <button mat-raised-button color="primary" [routerLink]="'../../edit/' + article.id">Edit</button>
-          <button mat-raised-button color="primary" (click)="onDelete(article.id)">Delete</button>
+          <button *ngIf="isAuthor" mat-raised-button color="primary" [routerLink]="'../../edit/' + article.id">
+            Edit
+          </button>
+          <button *ngIf="isAuthor" mat-raised-button color="primary" (click)="onDelete(article.id)">Delete</button>
         </footer>
       </article>
     </div>
