@@ -6,8 +6,25 @@
       {{ date.date.toDate() | date }}
     </a>
   </nav>
+  <div *ngIf="appointmentDate$ | async as hours">
+    <ng-container *ngIf="hours.length > 0; else noElements">
+      <button
+        class="hour-button"
+        mat-raised-button
+        [color]="hour.isSelected ? 'primary' : ''"
+        [disabled]="!hour.isAvailable"
+        *ngFor="let hour of hours"
+        (click)="hour.isSelected = !hour.isSelected; buttonSelected$.next()"
+      >
+        {{ hour.hour }}:00
+      </button>
+    </ng-container>
+    <ng-template #noElements>
+      No available hours found.
+    </ng-template>
+  </div>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
   <button mat-button cdkFocusInitial (click)="onNoClick()">No Thanks</button>
-  <button mat-button>Ok</button>
+  <button mat-raised-button color="primary" [disabled]="!(isAnySelected$ | async)">Ok</button>
 </div>

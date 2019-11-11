@@ -3,8 +3,8 @@ import { UserBasicInfo } from "./classes/user-basic-info";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import * as Moment from "moment";
 import { MatTabGroup, MatTabNav } from "@angular/material/tabs";
-import { ReplaySubject, of } from "rxjs";
-import { tap, switchMap } from "rxjs/operators";
+import { ReplaySubject, of, Observable, combineLatest } from "rxjs";
+import { tap, switchMap, map, startWith, shareReplay } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 
 @Component({
@@ -26,19 +26,41 @@ export class MakeAppointemntDialogComponent implements OnInit {
 
   selectedTabSource: ReplaySubject<TabDate> = new ReplaySubject();
 
-  appointmentDate$ = this.selectedTabSource.pipe(
+  appointmentDate$: Observable<AppointHourAvailbility[]> = this.selectedTabSource.pipe(
     tap(tabDate => this.dates.forEach(date => (date.isActive = date === tabDate))),
-    switchMap(tabDate =>
-      this.appointmentsCache.has(tabDate.date)
-        ? of(this.appointmentsCache.get(tabDate.date))
-        : this.getAppointmentData(tabDate)
-    )
+    switchMap(tabDate => this.getAppointmentData(tabDate)),
+    shareReplay()
   );
+
+  buttonSelected$ = new ReplaySubject();
+  isAnySelected$: Observable<boolean> = combineLatest(
+    this.appointmentDate$,
+    this.buttonSelected$.pipe(startWith())
+  ).pipe(map(([hours]) => hours.some(hour => hour.isSelected)));
 
   currentDate = Moment();
 
-  getAppointmentData(tabDate: TabDate): any {
-    return this.http.post("google.com", { teacherUsername: this.data.username, date: tabDate.date.toDate() });
+  getAppointmentData(tabDate: TabDate): Observable<AppointHourAvailbility[]> {
+    return this.http
+      .post("http://localhost:8080/api/users/get-day-availbility", {
+        teacherUsername: this.data.username,
+        date: tabDate.date.toDate()
+      })
+      .pipe(
+        map(response => {
+          const payload = (response as any).payload;
+          const hours: AppointHourAvailbility[] = [];
+          for (const key in payload) {
+            const value = payload[key];
+            hours.push({
+              hour: parseInt(key),
+              date: tabDate.date.toDate(),
+              isAvailable: value
+            });
+          }
+          return hours;
+        })
+      );
   }
   onNoClick() {
     this.dialogRef.close();
@@ -48,7 +70,7 @@ export class MakeAppointemntDialogComponent implements OnInit {
     this.dates = this.acquireDates(Moment()).map(this.mapToTabDates);
 
     if (this.dates.length > 0) {
-      this.dates[0].isActive = true;
+      this.onTabSelected(this.dates[0]);
     }
   }
 
@@ -81,4 +103,11 @@ export class MakeAppointemntDialogComponent implements OnInit {
 export interface TabDate {
   date: Moment.Moment;
   isActive: boolean;
+}
+
+export interface AppointHourAvailbility {
+  hour: number;
+  date: Date;
+  isAvailable: boolean;
+  isSelected?: boolean;
 }
