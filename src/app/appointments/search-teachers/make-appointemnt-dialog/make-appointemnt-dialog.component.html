@@ -26,5 +26,7 @@
 </div>
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
   <button mat-button cdkFocusInitial (click)="onNoClick()">No Thanks</button>
-  <button mat-raised-button color="primary" [disabled]="!(isAnySelected$ | async)">Ok</button>
+  <button mat-raised-button color="primary" [disabled]="!(isAnySelected$ | async)" (click)="addAppointment()">
+    Ok
+  </button>
 </div>

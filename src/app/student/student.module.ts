@@ -8,7 +8,6 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 
 @NgModule({
   declarations: [StudentComponent],
-  imports: [CommonModule, StudentRoutingModule, SharedModule],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: CookieInterceptor, multi: true }]
+  imports: [CommonModule, StudentRoutingModule, SharedModule]
 })
 export class StudentModule {}

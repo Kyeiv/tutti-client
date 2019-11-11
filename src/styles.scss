@@ -78,3 +78,11 @@ mat-form-field.no-padding .mat-form-field-wrapper {
   padding: 0;
   margin: 0;
 }
+
+.mat-snack-bar-container {
+  background: #333;
+}
+
+.center-snackbar .mat-simple-snackbar {
+  justify-content: center !important;
+}

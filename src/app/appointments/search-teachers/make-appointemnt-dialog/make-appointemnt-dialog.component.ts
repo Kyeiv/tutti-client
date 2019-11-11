@@ -4,8 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import * as Moment from "moment";
 import { MatTabGroup, MatTabNav } from "@angular/material/tabs";
 import { ReplaySubject, of, Observable, combineLatest } from "rxjs";
-import { tap, switchMap, map, startWith, shareReplay } from "rxjs/operators";
+import { tap, switchMap, map, startWith, shareReplay, filter, switchMapTo } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-make-appointemnt-dialog",
@@ -16,7 +17,8 @@ export class MakeAppointemntDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<MakeAppointemntDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserBasicInfo,
-    private http: HttpClient
+    private http: HttpClient,
+    private matSnackBar: MatSnackBar
   ) {}
 
   @ViewChild(MatTabNav, { static: true }) tabGroup: MatTabNav;
@@ -97,6 +99,35 @@ export class MakeAppointemntDialogComponent implements OnInit {
       isActive: false,
       date: moment
     };
+  }
+
+  addAppointment() {
+    this.appointmentDate$
+      .pipe(
+        map(day => day.filter(d => d.isSelected)),
+        map(day => ({
+          teacherName: this.data.username,
+          studentName: sessionStorage.getItem("username"),
+          dateTimes: day.map(d =>
+            // Moment(d.date)
+            //   .set("hours", d.hour)
+            //   .set("minutes", 0)
+            //   .toDate()
+            {
+              const tempDate = new Date(d.date);
+              tempDate.setHours(d.hour);
+              tempDate.setMinutes(0);
+              return tempDate;
+            }
+          )
+        })),
+        switchMap(day => this.http.post("http://localhost:8080/api/users/appointment", day)),
+        tap(res => {
+          this.matSnackBar.open("Appointment made succesfully!", "", { duration: 2000, panelClass: "center-snackbar" });
+          this.dialogRef.close();
+        })
+      )
+      .subscribe();
   }
 }
 

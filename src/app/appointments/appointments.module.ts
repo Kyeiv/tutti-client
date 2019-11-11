@@ -10,6 +10,7 @@ import { MakeAppointemntDialogComponent } from "./search-teachers/make-appointem
 import { MatDialogModule } from "@angular/material/dialog";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { CookieInterceptor } from "../shared/services/cookie.interceptor";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { CookieInterceptor } from "../shared/services/cookie.interceptor";
     MyAppointmentsComponent,
     MakeAppointemntDialogComponent
   ],
-  imports: [CommonModule, AppointmentsRoutingModule, SharedModule, MatDialogModule],
+  imports: [CommonModule, AppointmentsRoutingModule, SharedModule, MatDialogModule, MatSnackBarModule],
   entryComponents: [MakeAppointemntDialogComponent],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: CookieInterceptor, multi: true }]
 })
