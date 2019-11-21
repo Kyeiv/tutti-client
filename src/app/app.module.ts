@@ -12,6 +12,11 @@ import { TeacherRoutingModule } from "./teacher/teacher-routing.module";
 import { StudentRoutingModule } from "./student/student-routing.module";
 import { AppointmentsRoutingModule } from "./appointments/appointments-routing.module";
 import { MatDialogModule } from "@angular/material/dialog";
+import { registerLocaleData } from "@angular/common";
+import localePl from "@angular/common/locales/pl";
+
+// the second parameter 'pl' is optional
+registerLocaleData(localePl, "pl");
 
 @NgModule({
   declarations: [AppComponent],
