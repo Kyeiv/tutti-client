@@ -52,13 +52,14 @@ export class MakeAppointemntDialogComponent implements OnInit {
       .pipe(
         map(response => {
           const payload = (response as any).payload;
+          const currentDate = new Date();
           const hours: AppointHourAvailbility[] = [];
           for (const key in payload) {
             const value = payload[key];
             hours.push({
               hour: parseInt(key),
               date: tabDate.date.toDate(),
-              isAvailable: value
+              isAvailable: value && Number(key) > currentDate.getHours()
             });
           }
           return hours;

@@ -60,16 +60,16 @@
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef>
-          Actions
-        </th>
+        <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-          <button mat-raised-button color="primary" [routerLink]="'../../blog/' + element.teacher.username">
-            See blog
-          </button>
-          <button mat-raised-button color="primary" (click)="makeAppointment(element)">
-            Appointment
-          </button>
+          <div class="full-height" fxLayout="row" fxLayoutAlign="end center">
+            <button mat-raised-button color="primary" [routerLink]="'../../blog/' + element.teacher.username">
+              See blog
+            </button>
+            <button mat-raised-button color="primary" (click)="makeAppointment(element)" style="margin-left: 10px;">
+              Appointment
+            </button>
+          </div>
         </td>
       </ng-container>
 

@@ -47,7 +47,7 @@ export class SearchTeachersComponent implements OnInit {
   }
 
   public makeAppointment(element) {
-    this.dialog.open(MakeAppointemntDialogComponent, { data: element });
+    this.dialog.open(MakeAppointemntDialogComponent, { data: element.teacher });
   }
 }
 
