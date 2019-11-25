@@ -28,7 +28,7 @@ export class ArticlePreviewComponent implements OnInit {
       this.isAuthor = this.userId === sessionStorage.getItem("username");
       this.http.get(`http://localhost:8080/api/posts/${this.userId}`).subscribe(
         res => {
-          this.articles = (res as any).payload;
+          this.articles = (res as any).payload.sort((a, b) => (new Date(a.createdAt) < new Date(b.createdAt) ? 1 : -1));
           this.indicator.setBusy(false);
         },
         err => {

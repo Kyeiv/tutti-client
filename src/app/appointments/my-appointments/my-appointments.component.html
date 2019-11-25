@@ -42,3 +42,9 @@
   ></tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
 </table>
+
+<div class="full-height" *ngIf="dataSource.length == 0" fxLayout="row" fxLayoutAlign="center center">
+  <h1 style="color: grey;">
+    Nie masz umówionych lekcji :(
+  </h1>
+</div>

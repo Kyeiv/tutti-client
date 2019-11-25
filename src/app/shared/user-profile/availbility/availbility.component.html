@@ -44,7 +44,7 @@
               readonly
               [(ngModel)]="element.hourBegin"
             />
-            <ngx-material-timepicker color="primary" #hourBeginCtrl></ngx-material-timepicker>
+            <ngx-material-timepicker color="primary" [hoursOnly]="true" #hourBeginCtrl></ngx-material-timepicker>
           </mat-form-field>
         </ng-template>
       </td>
@@ -63,11 +63,12 @@
               [format]="24"
               placeholder="Enter date"
               matInput
+              [min]="element.hourBegin"
               [ngxTimepicker]="hourEndCtrl"
               readonly
               [(ngModel)]="element.hourEnd"
             />
-            <ngx-material-timepicker #hourEndCtrl></ngx-material-timepicker>
+            <ngx-material-timepicker [hoursOnly]="true" #hourEndCtrl></ngx-material-timepicker>
           </mat-form-field>
         </ng-template>
       </td>

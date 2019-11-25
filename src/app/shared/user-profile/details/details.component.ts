@@ -37,8 +37,8 @@ export class DetailsComponent implements OnInit {
       surname: [this.userDetails.surname, Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
       country: [this.userDetails.country, Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
       city: [this.userDetails.city, Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
-      mail: [this.userDetails.mail, Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
-      phone: [this.userDetails.phone, Validators.compose([Validators.required, Validators.pattern(/\w*/)])]
+      mail: [this.userDetails.mail, Validators.compose([Validators.required, Validators.pattern(/^(.+)@(.+)$/)])],
+      phone: [this.userDetails.phone, Validators.compose([Validators.required, Validators.pattern(/^[0-9]{9}$/)])]
     });
     this.detailsForm.valueChanges.subscribe(() => this.onDetailsFormChanged());
   }

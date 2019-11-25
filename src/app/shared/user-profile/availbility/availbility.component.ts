@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { SharedService } from "../../services/shared.service";
 
 @Component({
   selector: "app-availbility",
@@ -18,7 +19,7 @@ export class AvailbilityComponent implements OnInit {
     { key: "Saturday", value: DAYS.SATURDAY },
     { key: "Sunday", value: DAYS.SUNDAY }
   ];
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toaster: SharedService) {}
 
   ngOnInit() {
     this.getAvailbilities();
@@ -65,6 +66,10 @@ export class AvailbilityComponent implements OnInit {
   }
 
   public onSave(element: Availbility) {
+    if (element.hourBegin >= element.hourEnd) {
+      this.toaster.openSnackBar("Godzina początkowa musi być mniejsza od końcowej!");
+      return;
+    }
     if (element.id) {
       this.http.patch(`http://localhost:8080/api/availbilities`, element).subscribe(
         res => {
