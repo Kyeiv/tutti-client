@@ -19,7 +19,7 @@ export class SearchTeachersComponent implements OnInit {
   teachers$: ReplaySubject<UserBasicInfo[]> = new ReplaySubject();
   public levels: LEVELS[] = [LEVELS.PRIMARY_SCHOOL, LEVELS.HIGH_SCHOOL, LEVELS.UNIVERSITY];
   public specializationNames: NAMES[] = [NAMES.HUMANITIES, NAMES.SCIENCE, NAMES.ENGLISH];
-  public displayedColumns: string[] = ["index", "name", "level", "action"];
+  public displayedColumns: string[] = ["index", "name", "level", "salary", "action"];
 
   ngOnInit() {}
 
@@ -28,12 +28,15 @@ export class SearchTeachersComponent implements OnInit {
       res => {
         console.log(res);
         const teachers = (res as any).payload.map(
-          teacher =>
+          t =>
             ({
-              username: teacher.username,
-              name: teacher.userDetails.name,
-              surname: teacher.userDetails.surname
-            } as UserBasicInfo)
+              teacher: {
+                username: t.key.username,
+                name: t.key.userDetails.name,
+                surname: t.key.userDetails.surname
+              },
+              salary: t.value.salary
+            } as TeacherWithSalary)
         );
         this.teachers$.next(teachers);
       },
@@ -46,6 +49,11 @@ export class SearchTeachersComponent implements OnInit {
   public makeAppointment(element) {
     this.dialog.open(MakeAppointemntDialogComponent, { data: element });
   }
+}
+
+export interface TeacherWithSalary {
+  teacher: UserBasicInfo;
+  salary: number;
 }
 
 export interface SearchQuery {

@@ -5,6 +5,7 @@ import { ErrorStateMatcher } from "@angular/material/core";
 import { Indicator } from "../indicator/indicator.model";
 import { flatMap, tap, catchError } from "rxjs/operators";
 import { Router } from "@angular/router";
+import { SharedService } from "../../services/shared.service";
 
 @Component({
   selector: "app-login",
@@ -21,7 +22,12 @@ export class LoginComponent implements OnInit {
   indicator: Indicator = new Indicator();
   passwordsMatcher = new RepeatPasswordEStateMatcher();
 
-  constructor(private http: HttpClient, private formBuilder: FormBuilder, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private toaster: SharedService
+  ) {}
 
   submitLogin() {
     this.indicator.setBusy(true);
@@ -37,7 +43,7 @@ export class LoginComponent implements OnInit {
         }),
         catchError((err, caught) => {
           this.indicator.setBusy(false);
-          alert(":CCCCCCCCC");
+          this.toaster.openSnackBar("Login error!");
           throw caught;
         })
       )
@@ -52,11 +58,13 @@ export class LoginComponent implements OnInit {
 
     this.http.post(`http://localhost:8080/auth/registration`, this.register).subscribe(
       res => {
+        this.toaster.openSnackBar("Registered succesfully!");
         this.registerForm.reset();
         this.currentTab = 0;
         this.indicator.setBusy(false);
       },
       err => {
+        this.toaster.openSnackBar("Registered error!");
         this.indicator.setBusy(false);
         console.log(err);
       }
@@ -73,16 +81,22 @@ export class LoginComponent implements OnInit {
   private generateForm() {
     this.registerForm = this.formBuilder.group(
       {
-        username: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
-        password: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
-        confirmPassword: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
+        username: ["", Validators.compose([Validators.required, Validators.pattern(/[A-Za-z0-9]{3,20}/)])],
+        password: [
+          "",
+          Validators.compose([
+            Validators.required,
+            Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&-_,\.])[A-Za-z\d@$!%*#?&-_,\.]{5,64}/)
+          ])
+        ],
+        confirmPassword: ["", Validators.compose([Validators.required])],
         name: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
         surname: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
         authority: ["", Validators.compose([Validators.required])],
         country: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
         city: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
-        mail: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])],
-        phone: ["", Validators.compose([Validators.required, Validators.pattern(/\w*/)])]
+        mail: ["", Validators.compose([Validators.required, Validators.pattern(/^(.+)@(.+)$/)])],
+        phone: ["", Validators.compose([Validators.required, Validators.pattern(/[0-9]{9,9}/)])]
       },
       { validator: RepeatPasswordValidator }
     );

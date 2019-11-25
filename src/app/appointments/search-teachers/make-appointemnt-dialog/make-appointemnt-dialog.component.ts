@@ -7,6 +7,7 @@ import { ReplaySubject, of, Observable, combineLatest } from "rxjs";
 import { tap, switchMap, map, startWith, shareReplay, filter, switchMapTo } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { SharedService } from "src/app/shared/services/shared.service";
 
 @Component({
   selector: "app-make-appointemnt-dialog",
@@ -18,7 +19,7 @@ export class MakeAppointemntDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<MakeAppointemntDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserBasicInfo,
     private http: HttpClient,
-    private matSnackBar: MatSnackBar
+    private toaster: SharedService
   ) {}
 
   @ViewChild(MatTabNav, { static: true }) tabGroup: MatTabNav;
@@ -123,7 +124,7 @@ export class MakeAppointemntDialogComponent implements OnInit {
         })),
         switchMap(day => this.http.post("http://localhost:8080/api/users/appointment", day)),
         tap(res => {
-          this.matSnackBar.open("Appointment made succesfully!", "", { duration: 2000, panelClass: "center-snackbar" });
+          this.toaster.openSnackBar("Appointment made succesfully!");
           this.dialogRef.close();
         })
       )

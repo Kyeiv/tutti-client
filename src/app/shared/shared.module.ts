@@ -25,6 +25,7 @@ import { UserProfileService } from "./user-profile/user-profile.service";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from "@angular/material/table";
 import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
     RouterModule,
     MatIconModule,
     MatTableModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    MatSnackBarModule
   ],
   exports: [
     CommonModule,
