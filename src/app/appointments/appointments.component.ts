@@ -12,12 +12,15 @@ export class AppointmentsComponent implements OnInit {
   navLinks: NavLink[];
 
   ngOnInit() {
-    const principal = JSON.parse(sessionStorage.getItem("principal"));
-    const authority = principal.authorities[0].authority.toLowerCase();
+    const principal = sessionStorage.getItem("principal");
+    const authority = principal.toLowerCase();
 
     switch (authority) {
       case "student":
-        this.navLinks = [{ label: "My Appointments", path: "my-appointments" }, { label: "Search", path: "search" }];
+        this.navLinks = [
+          { label: "My Appointments", path: "my-appointments" },
+          { label: "Search", path: "search" }
+        ];
         break;
       case "teacher":
         this.navLinks = [{ label: "My Appointments", path: "my-appointments" }];

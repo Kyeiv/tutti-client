@@ -13,8 +13,8 @@ export class UserProfileComponent implements OnInit {
   navLinks: NavLink[];
 
   ngOnInit() {
-    const principal = JSON.parse(sessionStorage.getItem("principal"));
-    const authority = principal.authorities[0].authority.toLowerCase();
+    const principal = sessionStorage.getItem("principal");
+    const authority = principal.toLowerCase();
 
     switch (authority) {
       case "teacher":

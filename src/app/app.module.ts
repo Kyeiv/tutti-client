@@ -14,6 +14,7 @@ import { AppointmentsRoutingModule } from "./appointments/appointments-routing.m
 import { MatDialogModule } from "@angular/material/dialog";
 import { registerLocaleData } from "@angular/common";
 import localePl from "@angular/common/locales/pl";
+import { TokenInterceptor } from "./shared/services/token.interceptor";
 
 // the second parameter 'pl' is optional
 registerLocaleData(localePl, "pl");
@@ -30,7 +31,11 @@ registerLocaleData(localePl, "pl");
     BrowserAnimationsModule,
     MatDialogModule
   ],
-  providers: [SharedService, { provide: HTTP_INTERCEPTORS, useClass: CookieInterceptor, multi: true }],
+  providers: [
+    SharedService,
+    { provide: HTTP_INTERCEPTORS, useClass: CookieInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

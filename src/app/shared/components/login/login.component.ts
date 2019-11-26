@@ -32,8 +32,9 @@ export class LoginComponent implements OnInit {
   submitLogin() {
     this.indicator.setBusy(true);
     this.http
-      .post(`http://localhost:8080/login?username=${this.login.username}&password=${this.login.password}`, {})
+      .post(`http://localhost:8080/login`, { username: this.login.username, password: this.login.password })
       .pipe(
+        tap(res => localStorage.setItem("token", (res as any).token)),
         flatMap(() => this.http.get(`http://localhost:8080/auth/whoami`)),
         tap(res => sessionStorage.setItem("principal", JSON.stringify(res))),
         tap(res => {

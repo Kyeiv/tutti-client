@@ -26,6 +26,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from "@angular/material/table";
 import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatMenuModule } from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
     MatIconModule,
     MatTableModule,
     NgxMaterialTimepickerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatMenuModule
   ],
   exports: [
     CommonModule,
@@ -77,7 +79,8 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
     UserProfileComponent,
     MatIconModule,
     MatTableModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    MatMenuModule
   ],
   providers: [UserProfileService]
 })

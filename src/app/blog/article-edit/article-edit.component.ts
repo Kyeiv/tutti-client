@@ -68,7 +68,7 @@ export class ArticleEditComponent implements OnInit {
     if (this.isAddingNew) {
       this.http.post(`http://localhost:8080/api/posts`, this.article).subscribe(
         res => {
-          this.router.navigate(["../"], { relativeTo: this.route });
+          this.location.back();
           this.indicator.setBusy(false);
         },
         err => {
@@ -79,6 +79,7 @@ export class ArticleEditComponent implements OnInit {
     } else {
       this.http.patch(`http://localhost:8080/api/posts`, this.article).subscribe(
         res => {
+          this.location.back();
           this.indicator.setBusy(false);
         },
         err => {

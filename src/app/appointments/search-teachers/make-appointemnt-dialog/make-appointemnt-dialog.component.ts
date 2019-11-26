@@ -59,7 +59,7 @@ export class MakeAppointemntDialogComponent implements OnInit {
             hours.push({
               hour: parseInt(key),
               date: tabDate.date.toDate(),
-              isAvailable: value && Number(key) > currentDate.getHours()
+              isAvailable: value && Number(key) > currentDate.getHours() && currentDate > tabDate.date.toDate()
             });
           }
           return hours;
@@ -71,7 +71,35 @@ export class MakeAppointemntDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dates = this.acquireDates(Moment()).map(this.mapToTabDates);
+    this.currentDate = Moment();
+    this.generateDates();
+  }
+
+  public previousMonth() {
+    this.currentDate.subtract(1, "month");
+    if (this.currentDate.year() !== Moment().year() || this.currentDate.month() !== Moment().month()) {
+      this.currentDate.set("day", 1);
+    } else {
+      this.currentDate.set("day", Moment().get("day"));
+    }
+    this.generateDates();
+  }
+
+  public nextMonth() {
+    this.currentDate.add(1, "month");
+    if (
+      this.currentDate.get("year") !== Moment().get("year") ||
+      this.currentDate.get("month") !== Moment().get("month")
+    ) {
+      this.currentDate.set("day", 1);
+    } else {
+      this.currentDate.set("day", Moment().get("day"));
+    }
+    this.generateDates();
+  }
+
+  public generateDates() {
+    this.dates = this.acquireDates(this.currentDate).map(this.mapToTabDates);
 
     if (this.dates.length > 0) {
       this.onTabSelected(this.dates[0]);

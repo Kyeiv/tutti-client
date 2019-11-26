@@ -13,7 +13,14 @@
       {{ link.label }}
     </a>
   </nav>
-  <div class="user">
-    {{ username }}
+  <div class="user" fxLayout="row" fxLayout="end center">
+    <button mat-button>
+      {{ username }}
+    </button>
+    <button mat-button (click)="logout()">
+      <mat-icon>
+        power_settings_new
+      </mat-icon>
+    </button>
   </div>
 </mat-toolbar>

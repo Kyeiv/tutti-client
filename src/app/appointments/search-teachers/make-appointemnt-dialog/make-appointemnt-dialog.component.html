@@ -1,6 +1,19 @@
 <h1 mat-dialog-title>Appointment for {{ data.name }} {{ data.surname }}</h1>
 <div mat-dialog-content>
-  <p>Select preferred date</p>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <p>Select preferred date</p>
+    <button mat-icon-button (click)="previousMonth()">
+      <mat-icon>
+        chevron_left
+      </mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="nextMonth()">
+      <mat-icon>
+        chevron_right
+      </mat-icon>
+    </button>
+  </div>
   <nav mat-tab-nav-bar>
     <a mat-tab-link *ngFor="let date of dates" (click)="onTabSelected(date)" [active]="date.isActive">
       {{ date.date.toDate() | date }}
@@ -20,7 +33,9 @@
       </button>
     </ng-container>
     <ng-template #noElements>
-      No available hours found.
+      <div style="margin-top: 15px;">
+        No available hours found.
+      </div>
     </ng-template>
   </div>
 </div>
