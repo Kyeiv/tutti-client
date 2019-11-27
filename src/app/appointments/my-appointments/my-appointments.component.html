@@ -2,7 +2,7 @@
   <ng-container matColumnDef="date">
     <th style="height: 0;" mat-header-cell *matHeaderCellDef>Data</th>
     <td mat-cell *matCellDef="let element">
-      {{ element.date | date: "EEEE, h:mm, d MMMM, y":null:"pl" }} {{ isFromPast(element.date) ? "(zakończono)" : "" }}
+      {{ element.date | date: "EEEE, HH:mm, d MMMM, y":null:"pl" }} {{ isFromPast(element.date) ? "(zakończono)" : "" }}
     </td>
   </ng-container>
 

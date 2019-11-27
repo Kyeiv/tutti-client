@@ -32,7 +32,8 @@ export class MakeAppointemntDialogComponent implements OnInit {
   appointmentDate$: Observable<AppointHourAvailbility[]> = this.selectedTabSource.pipe(
     tap(tabDate => this.dates.forEach(date => (date.isActive = date === tabDate))),
     switchMap(tabDate => this.getAppointmentData(tabDate)),
-    shareReplay()
+    tap(data => this.tabGroup.updateActiveLink()),
+    shareReplay(1)
   );
 
   buttonSelected$ = new ReplaySubject();
@@ -54,12 +55,26 @@ export class MakeAppointemntDialogComponent implements OnInit {
           const payload = (response as any).payload;
           const currentDate = new Date();
           const hours: AppointHourAvailbility[] = [];
+          const isPast = (d1, d2) => {
+            const day1 = new Date(Date.UTC(d1.getUTCFullYear(), d1.getUTCMonth(), d1.getUTCDate()));
+            const day2 = new Date(Date.UTC(d2.getUTCFullYear(), d2.getUTCMonth(), d2.getUTCDate()));
+            return day1.getTime() > day2.getTime();
+          };
+          const isPresent = (d1, d2) => {
+            const day1 = new Date(Date.UTC(d1.getUTCFullYear(), d1.getUTCMonth(), d1.getUTCDate()));
+            const day2 = new Date(Date.UTC(d2.getUTCFullYear(), d2.getUTCMonth(), d2.getUTCDate()));
+            return day1.getTime() === day2.getTime();
+          };
           for (const key in payload) {
             const value = payload[key];
             hours.push({
               hour: parseInt(key),
               date: tabDate.date.toDate(),
-              isAvailable: value && Number(key) > currentDate.getHours() && currentDate > tabDate.date.toDate()
+              isAvailable: isPast(currentDate, tabDate.date.toDate())
+                ? false
+                : isPresent(currentDate, tabDate.date.toDate())
+                ? value && Number(key) > currentDate.getHours()
+                : value
             });
           }
           return hours;
@@ -78,22 +93,19 @@ export class MakeAppointemntDialogComponent implements OnInit {
   public previousMonth() {
     this.currentDate.subtract(1, "month");
     if (this.currentDate.year() !== Moment().year() || this.currentDate.month() !== Moment().month()) {
-      this.currentDate.set("day", 1);
+      this.currentDate.set("date", 1);
     } else {
-      this.currentDate.set("day", Moment().get("day"));
+      this.currentDate.set("date", Moment().date());
     }
     this.generateDates();
   }
 
   public nextMonth() {
     this.currentDate.add(1, "month");
-    if (
-      this.currentDate.get("year") !== Moment().get("year") ||
-      this.currentDate.get("month") !== Moment().get("month")
-    ) {
-      this.currentDate.set("day", 1);
+    if (this.currentDate.year() !== Moment().year() || this.currentDate.month() !== Moment().month()) {
+      this.currentDate.set("date", 1);
     } else {
-      this.currentDate.set("day", Moment().get("day"));
+      this.currentDate.set("date", Moment().date());
     }
     this.generateDates();
   }

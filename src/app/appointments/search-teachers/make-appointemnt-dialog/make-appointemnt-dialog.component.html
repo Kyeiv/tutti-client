@@ -7,7 +7,9 @@
         chevron_left
       </mat-icon>
     </button>
-
+    <h3>
+      {{ currentDate.toDate() | date: "MMM yyyy":null:"pl" }}
+    </h3>
     <button mat-icon-button (click)="nextMonth()">
       <mat-icon>
         chevron_right
@@ -16,10 +18,10 @@
   </div>
   <nav mat-tab-nav-bar>
     <a mat-tab-link *ngFor="let date of dates" (click)="onTabSelected(date)" [active]="date.isActive">
-      {{ date.date.toDate() | date }}
+      {{ date.date.toDate() | date: "dd MMM yyyy":null:"pl" }}
     </a>
   </nav>
-  <div *ngIf="appointmentDate$ | async as hours">
+  <div *ngIf="appointmentDate$ | async as hours; else noElements">
     <ng-container *ngIf="hours.length > 0; else noElements">
       <button
         class="hour-button"
@@ -32,12 +34,12 @@
         {{ hour.hour }}:00
       </button>
     </ng-container>
-    <ng-template #noElements>
-      <div style="margin-top: 15px;">
-        No available hours found.
-      </div>
-    </ng-template>
   </div>
+  <ng-template #noElements>
+    <div style="margin-top: 15px;">
+      No available hours found.
+    </div>
+  </ng-template>
 </div>
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
   <button mat-button cdkFocusInitial (click)="onNoClick()">No Thanks</button>
