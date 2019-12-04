@@ -87,8 +87,6 @@ export class SpecializationsComponent implements OnInit {
 }
 
 export interface Specialization {
-  likes?: number;
-  dislikes?: number;
   level?: string;
   name?: string;
   salary?: number;
