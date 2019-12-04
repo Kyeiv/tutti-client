@@ -18,12 +18,12 @@ export class AppointmentsComponent implements OnInit {
     switch (authority) {
       case "student":
         this.navLinks = [
-          { label: "My Appointments", path: "my-appointments" },
-          { label: "Search", path: "search" }
+          { label: "Moje lekcje", path: "my-appointments" },
+          { label: "Szukaj", path: "search" }
         ];
         break;
       case "teacher":
-        this.navLinks = [{ label: "My Appointments", path: "my-appointments" }];
+        this.navLinks = [{ label: "Moje lekcje", path: "my-appointments" }];
         break;
     }
   }

@@ -3,11 +3,11 @@
   <div class="row" fxLayout="row">
     <div class="col-12">
       <header fxLayout="row" fxLayoutAlign="start center">
-        <h1>{{ userId }}'s Articles</h1>
+        <h1>{{ userId }} Blog</h1>
         <div fxFlex></div>
         <div>
           <button *ngIf="isAuthor" color="primary" mat-raised-button routerLink="../add">
-            Write new
+            Nowy artykuł
           </button>
         </div>
       </header>
@@ -21,16 +21,16 @@
             {{ article.title }}
           </h1>
           <time class="article-date">
-            {{ article.createdAt | date }}
+            {{ article.createdAt | date: "EEEE, d MMMM y":null:"pl" }}
           </time>
         </header>
         <section class="article-content" [innerHTML]="article.content | slice: 0:500"></section>
         <footer class="article-footer" fxLayout="row" fxLayoutAlign="end center">
-          <button mat-raised-button color="primary" [routerLink]="'../article/' + article.id">Read more</button>
+          <button mat-raised-button color="primary" [routerLink]="'../article/' + article.id">Czytaj więcej</button>
           <button *ngIf="isAuthor" mat-raised-button color="primary" [routerLink]="'../edit/' + article.id">
-            Edit
+            Edytuj
           </button>
-          <button *ngIf="isAuthor" mat-raised-button color="primary" (click)="onDelete(article.id)">Delete</button>
+          <button *ngIf="isAuthor" mat-raised-button color="primary" (click)="onDelete(article.id)">Usuń</button>
         </footer>
       </article>
     </div>

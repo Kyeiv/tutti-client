@@ -1,7 +1,7 @@
-<h1 mat-dialog-title>Appointment for {{ data.name }} {{ data.surname }}</h1>
+<h1 mat-dialog-title>Lekcja z {{ data.name }} {{ data.surname }}</h1>
 <div mat-dialog-content>
   <div fxLayout="row" fxLayoutAlign="start center">
-    <p>Select preferred date</p>
+    <p>Wybierz datę</p>
     <button mat-icon-button (click)="previousMonth()">
       <mat-icon>
         chevron_left
@@ -37,12 +37,12 @@
   </div>
   <ng-template #noElements>
     <div style="margin-top: 15px;">
-      No available hours found.
+      Nie znaleziono dostępnych godzin.
     </div>
   </ng-template>
 </div>
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
-  <button mat-button cdkFocusInitial (click)="onNoClick()">No Thanks</button>
+  <button mat-button cdkFocusInitial (click)="onNoClick()">Anuluj</button>
   <button mat-raised-button color="primary" [disabled]="!(isAnySelected$ | async)" (click)="addAppointment()">
     Ok
   </button>

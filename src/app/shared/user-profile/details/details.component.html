@@ -4,19 +4,19 @@
       <indicator [indicator]="indicator"> </indicator>
       <div *ngIf="detailsForm" fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="detailsForm">
         <mat-form-field>
-          <input matInput type="text" placeholder="Name" formControlName="name" />
+          <input matInput type="text" placeholder="Imię" formControlName="name" />
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="text" placeholder="Surname" formControlName="surname" />
+          <input matInput type="text" placeholder="Nazwisko" formControlName="surname" />
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="text" placeholder="Country" formControlName="country" />
+          <input matInput type="text" placeholder="Państwo" formControlName="country" />
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="text" placeholder="City" formControlName="city" />
+          <input matInput type="text" placeholder="Miasto" formControlName="city" />
         </mat-form-field>
 
         <mat-form-field>
@@ -24,7 +24,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="text" placeholder="Phone Number" formControlName="phone" />
+          <input matInput type="text" placeholder="Numer telefonu" formControlName="phone" />
         </mat-form-field>
 
         <button
@@ -33,7 +33,7 @@
           mat-raised-button
           (click)="submitDetails()"
         >
-          Save
+          Zapisz
         </button>
       </div>
     </div>

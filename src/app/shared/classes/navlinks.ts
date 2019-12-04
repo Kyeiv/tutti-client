@@ -1,10 +1,10 @@
 export const teacherNavlinks = (username: string) => [
-  { label: "Appointments", path: "appointments" },
+  { label: "Lekcje", path: "appointments" },
   { label: "Blog", path: `blog/${username}` },
-  { label: "My profile", path: "my-profile" }
+  { label: "Mój profil", path: "my-profile" }
 ];
 
 export const studentNavlinks = [
-  { label: "Appointments", path: "appointments" },
-  { label: "My profile", path: "my-profile" }
+  { label: "Lekcje", path: "appointments" },
+  { label: "Mój profil", path: "my-profile" }
 ];

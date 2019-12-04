@@ -19,13 +19,13 @@ export class UserProfileComponent implements OnInit {
     switch (authority) {
       case "teacher":
         this.navLinks = [
-          { label: "Details", path: "details" },
-          { label: "Specializations", path: "specializations" },
-          { label: "Availbility", path: "availbility" }
+          { label: "Szczegóły", path: "details" },
+          { label: "Specializacje", path: "specializations" },
+          { label: "Dostępność", path: "availbility" }
         ];
         break;
       case "student":
-        this.navLinks = [{ label: "Details", path: "details" }];
+        this.navLinks = [{ label: "Szczegóły", path: "details" }];
         break;
     }
   }

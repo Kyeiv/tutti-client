@@ -7,31 +7,31 @@
           Tutti.
         </h1>
         <mat-tab-group [(selectedIndex)]="currentTab" dynamicHeight="true">
-          <mat-tab label="Login">
+          <mat-tab label="Logowanie">
             <div fxLayout="column" fxLayoutAlign="start stretch">
               <mat-form-field>
-                <input matInput type="text" placeholder="Username" [(ngModel)]="login.username" />
+                <input matInput type="text" placeholder="Login" [(ngModel)]="login.username" />
               </mat-form-field>
 
               <mat-form-field>
-                <input matInput type="password" placeholder="Password" [(ngModel)]="login.password" />
+                <input matInput type="password" placeholder="Hasło" [(ngModel)]="login.password" />
               </mat-form-field>
 
-              <button color="primary" mat-raised-button (click)="submitLogin()">Login</button>
+              <button color="primary" mat-raised-button (click)="submitLogin()">Zatwierdź</button>
             </div>
           </mat-tab>
 
-          <mat-tab label="Register">
+          <mat-tab label="Rejestracja">
             <div fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="registerForm">
               <mat-form-field>
-                <input matInput type="text" placeholder="Username" formControlName="username" />
+                <input matInput type="text" placeholder="Login" formControlName="username" />
               </mat-form-field>
 
               <mat-form-field>
                 <input
                   matInput
                   type="password"
-                  placeholder="Password"
+                  placeholder="Hasło"
                   formControlName="password"
                   [errorStateMatcher]="passwordsMatcher"
                 />
@@ -44,22 +44,22 @@
                 <input
                   matInput
                   type="password"
-                  placeholder="Comfirm password"
+                  placeholder="Potwierdź hasło"
                   formControlName="confirmPassword"
                   [errorStateMatcher]="passwordsMatcher"
                 />
               </mat-form-field>
 
               <mat-form-field>
-                <input matInput type="text" placeholder="Name" formControlName="name" />
+                <input matInput type="text" placeholder="Imię" formControlName="name" />
               </mat-form-field>
 
               <mat-form-field>
-                <input matInput type="text" placeholder="Surname" formControlName="surname" />
+                <input matInput type="text" placeholder="Nazwisko" formControlName="surname" />
               </mat-form-field>
 
               <mat-form-field>
-                <mat-select placeholder="Role" formControlName="authority">
+                <mat-select placeholder="Rola" formControlName="authority">
                   <mat-option value="STUDENT">
                     Student
                   </mat-option>
@@ -70,11 +70,11 @@
               </mat-form-field>
 
               <mat-form-field>
-                <input matInput type="text" placeholder="Country" formControlName="country" />
+                <input matInput type="text" placeholder="Państwo" formControlName="country" />
               </mat-form-field>
 
               <mat-form-field>
-                <input matInput type="text" placeholder="City" formControlName="city" />
+                <input matInput type="text" placeholder="Miasto" formControlName="city" />
               </mat-form-field>
 
               <mat-form-field>
@@ -82,11 +82,11 @@
               </mat-form-field>
 
               <mat-form-field>
-                <input matInput type="text" placeholder="Phone Number" formControlName="phone" />
+                <input matInput type="text" placeholder="Numer telefonu" formControlName="phone" />
               </mat-form-field>
 
               <button color="primary" [disabled]="registerForm.invalid" mat-raised-button (click)="submitRegister()">
-                Register
+                Rejestruj
               </button>
             </div>
           </mat-tab>

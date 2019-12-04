@@ -8,16 +8,16 @@
             {{ article.title }}
           </h1>
           <time class="article-date">
-            {{ article.createdAt | date }}
+            {{ article.createdAt | date: "EEEE, d MMMM y":null:"pl" }}
           </time>
         </header>
         <section class="article-content" [innerHTML]="article.content"></section>
         <footer class="article-footer" fxLayout="row" fxLayoutAlign="end center">
-          <button mat-raised-button color="primary" [routerLink]="'../..'">Return</button>
+          <button mat-raised-button color="primary" [routerLink]="'../..'">Powrót</button>
           <button *ngIf="isAuthor" mat-raised-button color="primary" [routerLink]="'../../edit/' + article.id">
-            Edit
+            Edytuj
           </button>
-          <button *ngIf="isAuthor" mat-raised-button color="primary" (click)="onDelete(article.id)">Delete</button>
+          <button *ngIf="isAuthor" mat-raised-button color="primary" (click)="onDelete(article.id)">Usuń</button>
         </footer>
       </article>
     </div>
