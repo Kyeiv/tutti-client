@@ -1,5 +1,5 @@
 export enum LEVELS {
-  PRIMARY_SCHOOL = "Primary school",
-  HIGH_SCHOOL = "High school",
-  UNIVERSITY = "University"
+  PRIMARY_SCHOOL = "Podstawowy",
+  HIGH_SCHOOL = "Szkoła średnia",
+  UNIVERSITY = "Uczelnia wyższa"
 }

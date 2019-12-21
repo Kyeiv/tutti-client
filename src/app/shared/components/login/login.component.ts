@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
         }),
         catchError((err, caught) => {
           this.indicator.setBusy(false);
-          this.toaster.openSnackBar("Login error!");
+          this.toaster.openSnackBar("Błąd logowania!");
           throw caught;
         })
       )
@@ -59,13 +59,13 @@ export class LoginComponent implements OnInit {
 
     this.http.post(`http://localhost:8080/auth/registration`, this.register).subscribe(
       res => {
-        this.toaster.openSnackBar("Registered succesfully!");
+        this.toaster.openSnackBar("Zarejestrowano pomyślnie!");
         this.registerForm.reset();
         this.currentTab = 0;
         this.indicator.setBusy(false);
       },
       err => {
-        this.toaster.openSnackBar("Registered error!");
+        this.toaster.openSnackBar("Błąd rejestracji!");
         this.indicator.setBusy(false);
         console.log(err);
       }

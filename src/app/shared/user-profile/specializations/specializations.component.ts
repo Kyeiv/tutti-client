@@ -13,7 +13,18 @@ export class SpecializationsComponent implements OnInit {
   public dataSource: Specialization[] = [];
   public displayedColumns: string[] = ["index", "name", "level", "salary", "action"];
   public levels: LEVELS[] = [LEVELS.PRIMARY_SCHOOL, LEVELS.HIGH_SCHOOL, LEVELS.UNIVERSITY];
-  public names: NAMES[] = [NAMES.HUMANITIES, NAMES.SCIENCE, NAMES.ENGLISH];
+  public names: NAMES[] = [
+    NAMES.POLISH,
+    NAMES.GERMAN,
+    NAMES.ENGLISH,
+    NAMES.HISTORY,
+    NAMES.GEOGRAPHY,
+    NAMES.BIOLOGY,
+    NAMES.MATHS,
+    NAMES.INFORMATICS,
+    NAMES.PHYSICS,
+    NAMES.CHEMISTRY
+  ];
   constructor(private http: HttpClient, private toaster: SharedService) {}
 
   ngOnInit() {

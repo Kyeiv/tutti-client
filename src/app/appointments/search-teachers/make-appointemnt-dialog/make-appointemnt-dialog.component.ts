@@ -165,7 +165,7 @@ export class MakeAppointemntDialogComponent implements OnInit {
         })),
         switchMap(day => this.http.post("http://localhost:8080/api/users/appointment", day)),
         tap(res => {
-          this.toaster.openSnackBar("Appointment made succesfully!");
+          this.toaster.openSnackBar("Lekcja umówiona pomyślnie!");
           this.dialogRef.close();
         })
       )

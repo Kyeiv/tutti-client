@@ -11,13 +11,13 @@ export class AvailbilityComponent implements OnInit {
   public dataSource: Availbility[] = [];
   public displayedColumns: string[] = ["index", "dayOfTheWeek", "hourBegin", "hourEnd", "action"];
   public days = [
-    { key: "Monday", value: DAYS.MONDAY },
-    { key: "Tuesday", value: DAYS.TUESDAY },
-    { key: "Wednesday", value: DAYS.WEDNESDAY },
-    { key: "Thursday", value: DAYS.THURSDAY },
-    { key: "Friday", value: DAYS.FRIDAY },
-    { key: "Saturday", value: DAYS.SATURDAY },
-    { key: "Sunday", value: DAYS.SUNDAY }
+    { key: "Poniedziałek", value: DAYS.MONDAY },
+    { key: "Wtorek", value: DAYS.TUESDAY },
+    { key: "Środa", value: DAYS.WEDNESDAY },
+    { key: "Czwartek", value: DAYS.THURSDAY },
+    { key: "Piątek", value: DAYS.FRIDAY },
+    { key: "Sobota", value: DAYS.SATURDAY },
+    { key: "Niedziela", value: DAYS.SUNDAY }
   ];
   constructor(private http: HttpClient, private toaster: SharedService) {}
 

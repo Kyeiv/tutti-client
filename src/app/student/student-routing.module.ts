@@ -27,10 +27,10 @@ const routes: Routes = [
       },
       ...blogRoutes,
       {
-        path: "appointments",
+        path: "my-appointments",
         loadChildren: () => import("../appointments/appointments.module").then(mod => mod.AppointmentsModule)
       },
-      { path: "**", redirectTo: "appointments" }
+      { path: "**", redirectTo: "my-appointments" }
     ],
     component: StudentComponent,
     canActivate: [AuthGuard],
