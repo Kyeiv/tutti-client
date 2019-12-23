@@ -34,7 +34,7 @@ export class AvailbilityComponent implements OnInit {
       this.dataSource.splice(this.dataSource.indexOf(element), 1);
       this.dataSource = [...this.dataSource];
     } else {
-      this.http.delete(`http://localhost:8080/api/availbilities/${element.id}`).subscribe(
+      this.http.delete(`http://` + window.location.hostname + `:8080/api/availbilities/${element.id}`).subscribe(
         res => {
           this.dataSource.splice(this.dataSource.indexOf(element), 1);
           this.dataSource = [...this.dataSource];
@@ -53,7 +53,7 @@ export class AvailbilityComponent implements OnInit {
   }
 
   public getAvailbilities() {
-    this.http.get(`http://localhost:8080/api/availbilities`).subscribe(
+    this.http.get(`http://` + window.location.hostname + `:8080/api/availbilities`).subscribe(
       res => {
         (res as any).payload.forEach((avaibility: Availbility) => {
           avaibility.hourBegin = avaibility.hourBegin.substr(0, avaibility.hourBegin.lastIndexOf(":"));
@@ -71,14 +71,14 @@ export class AvailbilityComponent implements OnInit {
       return;
     }
     if (element.id) {
-      this.http.patch(`http://localhost:8080/api/availbilities`, element).subscribe(
+      this.http.patch(`http://` + window.location.hostname + `:8080/api/availbilities`, element).subscribe(
         res => {
           element.isEdit = false;
         },
         err => console.log(err)
       );
     } else {
-      this.http.post(`http://localhost:8080/api/availbilities`, element).subscribe(
+      this.http.post(`http://` + window.location.hostname + `:8080/api/availbilities`, element).subscribe(
         res => {
           element.isEdit = false;
           element.isNew = false;

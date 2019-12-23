@@ -28,7 +28,7 @@ export class MyAppointmentsComponent implements OnInit {
   }
 
   public getMyAppointments() {
-    this.http.get("http://localhost:8080/api/users/my-appointments").subscribe(res => {
+    this.http.get(`http://` + window.location.hostname + `:8080/api/users/my-appointments`).subscribe(res => {
       this.dataSource = (res as any).payload
         .map(app => ({
           id: app.id,
@@ -47,8 +47,11 @@ export class MyAppointmentsComponent implements OnInit {
 
   public deleteAppointment(element) {
     this.http
-      .delete(`http://localhost:8080/api/users/remove-appointment/${element.id}`)
-      .subscribe(res => this.getMyAppointments(), err => console.log(err));
+      .delete(`http://` + window.location.hostname + `:8080/api/users/remove-appointment/${element.id}`)
+      .subscribe(
+        res => this.getMyAppointments(),
+        err => console.log(err)
+      );
   }
 
   public isFromPast(date: Date) {

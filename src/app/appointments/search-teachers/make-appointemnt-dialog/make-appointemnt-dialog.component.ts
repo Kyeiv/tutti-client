@@ -46,7 +46,7 @@ export class MakeAppointemntDialogComponent implements OnInit {
 
   getAppointmentData(tabDate: TabDate): Observable<AppointHourAvailbility[]> {
     return this.http
-      .post("http://localhost:8080/api/users/get-day-availbility", {
+      .post(`http://` + window.location.hostname + `:8080/api/users/get-day-availbility`, {
         teacherUsername: this.data.username,
         date: tabDate.date.toDate()
       })
@@ -163,7 +163,7 @@ export class MakeAppointemntDialogComponent implements OnInit {
             }
           )
         })),
-        switchMap(day => this.http.post("http://localhost:8080/api/users/appointment", day)),
+        switchMap(day => this.http.post(`http://` + window.location.hostname + `:8080/api/users/appointment`, day)),
         tap(res => {
           this.toaster.openSnackBar("Lekcja umówiona pomyślnie!");
           this.dialogRef.close();

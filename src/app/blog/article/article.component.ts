@@ -19,7 +19,7 @@ export class ArticleComponent implements OnInit {
     const articleId = this.route.snapshot.paramMap.get("articleId");
     if (articleId) {
       this.indicator.setBusy(true);
-      this.http.get(`http://localhost:8080/api/post/${articleId}`).subscribe(
+      this.http.get(`http://` + window.location.hostname + `:8080/api/post/${articleId}`).subscribe(
         res => {
           this.article = (res as any).payload;
           this.indicator.setBusy(false);
@@ -37,7 +37,7 @@ export class ArticleComponent implements OnInit {
 
   public onDelete(articleId: number) {
     this.indicator.setBusy(true);
-    this.http.delete(`http://localhost:8080/api/posts/${articleId}`).subscribe(
+    this.http.delete(`http://` + window.location.hostname + `:8080/api/posts/${articleId}`).subscribe(
       res => {
         this.indicator.setBusy(false);
         this.router.navigate(["../.."], { relativeTo: this.route });

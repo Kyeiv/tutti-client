@@ -35,7 +35,7 @@ export class SearchTeachersComponent implements OnInit {
   ngOnInit() {}
 
   public sendQuery() {
-    this.http.post(`http://localhost:8080/api/users/search`, this.query).subscribe(
+    this.http.post(`http://` + window.location.hostname + `:8080/api/users/search`, this.query).subscribe(
       res => {
         console.log(res);
         const teachers = (res as any).payload.map(

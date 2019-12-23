@@ -26,7 +26,7 @@ export class ArticlePreviewComponent implements OnInit {
     this.userId = this.route.parent.snapshot.paramMap.get("username");
     if (this.userId) {
       this.isAuthor = this.userId === sessionStorage.getItem("username");
-      this.http.get(`http://localhost:8080/api/posts/${this.userId}`).subscribe(
+      this.http.get(`http://` + window.location.hostname + `:8080/api/posts/${this.userId}`).subscribe(
         res => {
           this.articles = (res as any).payload.sort((a, b) => (new Date(a.createdAt) < new Date(b.createdAt) ? 1 : -1));
           this.indicator.setBusy(false);
@@ -37,13 +37,13 @@ export class ArticlePreviewComponent implements OnInit {
         }
       );
     } else {
-      this.router.navigate(["/login"]);
+      this.router.navigate(["/login-site"]);
     }
   }
 
   public onDelete(articleId: number) {
     this.indicator.setBusy(true);
-    this.http.delete(`http://localhost:8080/api/posts/${articleId}`).subscribe(
+    this.http.delete(`http://` + window.location.hostname + `:8080/api/posts/${articleId}`).subscribe(
       res => {
         this.getPosts();
       },

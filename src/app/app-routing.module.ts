@@ -3,7 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { LoginComponent } from "./shared/components/login/login.component";
 
 const routes: Routes = [
-  { path: "login", component: LoginComponent },
+  { path: "login-site", component: LoginComponent },
   { path: "**", pathMatch: "full", redirectTo: "student" }
 ];
 

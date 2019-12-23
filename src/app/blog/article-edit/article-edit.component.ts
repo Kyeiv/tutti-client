@@ -66,7 +66,7 @@ export class ArticleEditComponent implements OnInit {
   public onSave() {
     this.indicator.setBusy(true);
     if (this.isAddingNew) {
-      this.http.post(`http://localhost:8080/api/posts`, this.article).subscribe(
+      this.http.post(`http://` + window.location.hostname + `:8080/api/posts`, this.article).subscribe(
         res => {
           this.location.back();
           this.indicator.setBusy(false);
@@ -77,7 +77,7 @@ export class ArticleEditComponent implements OnInit {
         }
       );
     } else {
-      this.http.patch(`http://localhost:8080/api/posts`, this.article).subscribe(
+      this.http.patch(`http://` + window.location.hostname + `:8080/api/posts`, this.article).subscribe(
         res => {
           this.location.back();
           this.indicator.setBusy(false);
@@ -94,7 +94,7 @@ export class ArticleEditComponent implements OnInit {
     const articleId = this.route.snapshot.paramMap.get("articleId");
     if (articleId) {
       this.indicator.setBusy(true);
-      this.http.get(`http://localhost:8080/api/post/${articleId}`).subscribe(
+      this.http.get(`http://` + window.location.hostname + `:8080/api/post/${articleId}`).subscribe(
         res => {
           this.article = (res as any).payload;
           this.indicator.setBusy(false);

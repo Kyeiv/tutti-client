@@ -40,7 +40,7 @@ export class SpecializationsComponent implements OnInit {
       this.dataSource.splice(this.dataSource.indexOf(element), 1);
       this.dataSource = [...this.dataSource];
     } else {
-      this.http.delete(`http://localhost:8080/api/specializations/${element.id}`).subscribe(
+      this.http.delete(`http://` + window.location.hostname + `:8080/api/specializations/${element.id}`).subscribe(
         res => {
           this.dataSource.splice(this.dataSource.indexOf(element), 1);
           this.dataSource = [...this.dataSource];
@@ -59,7 +59,7 @@ export class SpecializationsComponent implements OnInit {
   }
 
   public getSpecializations() {
-    this.http.get(`http://localhost:8080/api/specializations`).subscribe(
+    this.http.get(`http://` + window.location.hostname + `:8080/api/specializations`).subscribe(
       res => {
         this.dataSource = (res as any).payload;
       },
@@ -78,14 +78,14 @@ export class SpecializationsComponent implements OnInit {
     }
 
     if (element.id) {
-      this.http.patch(`http://localhost:8080/api/specializations`, element).subscribe(
+      this.http.patch(`http://` + window.location.hostname + `:8080/api/specializations`, element).subscribe(
         res => {
           element.isEdit = false;
         },
         err => console.log(err)
       );
     } else {
-      this.http.post(`http://localhost:8080/api/specializations`, element).subscribe(
+      this.http.post(`http://` + window.location.hostname + `:8080/api/specializations`, element).subscribe(
         res => {
           element.isEdit = false;
           element.isNew = false;

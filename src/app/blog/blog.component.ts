@@ -10,21 +10,6 @@ import { Router } from "@angular/router";
 })
 export class BlogComponent implements OnInit {
   constructor(private router: Router) {}
-  // navLinks: NavLink[];
-  ngOnInit() {
-  //   const principal = JSON.parse(sessionStorage.getItem("principal"));
-  //   const principalName = principal.authorities[0].authority.toLowerCase();
-  //   switch (principalName) {
-  //     case "teacher":
-  //       this.navLinks = teacherNavlinks;
-  //       break;
-  //     case "student":
-  //       this.navLinks = studentNavlinks;
-  //       break;
-  //     default:
-  //       this.router.navigate(["/login"]);
-  //       break;
-  //   }
-  // }
-  }
+
+  ngOnInit() {}
 }

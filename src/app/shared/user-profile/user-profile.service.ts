@@ -11,7 +11,7 @@ export class UserProfileService {
   constructor(private http: HttpClient) {}
 
   public getUserDetails() {
-    this.http.get(`http://localhost:8080/api/user-details`).subscribe(
+    this.http.get(`http://` + window.location.hostname + `:8080/api/user-details`).subscribe(
       res => {
         this.detailsSource.next((res as any).payload);
       },
@@ -22,7 +22,7 @@ export class UserProfileService {
   }
 
   public setUserDetails(userDetails: UserDetails) {
-    this.http.put(`http://localhost:8080/api/user-details`, userDetails).subscribe(
+    this.http.put(`http://` + window.location.hostname + `:8080/api/user-details`, userDetails).subscribe(
       res => {
         this.detailsSource.next(userDetails);
       },
