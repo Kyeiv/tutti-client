@@ -37,7 +37,8 @@ export class ArticlePreviewComponent implements OnInit {
         }
       );
     } else {
-      this.router.navigate(["/login-site"]);
+      this.indicator.setBusy(false);
+      this.router.navigate(["/home-login"]);
     }
   }
 
@@ -46,6 +47,7 @@ export class ArticlePreviewComponent implements OnInit {
     this.http.delete(`http://` + window.location.hostname + `:8080/api/posts/${articleId}`).subscribe(
       res => {
         this.getPosts();
+        this.indicator.setBusy(false);
       },
       err => {
         console.log(err);

@@ -28,7 +28,7 @@ export class DetailsComponent implements OnInit {
       )
       .subscribe();
     this.userProfileService.getUserDetails();
-    this.indicator.setBusy(true);
+    //this.indicator.setBusy(true);
   }
 
   private buildForm() {
@@ -55,7 +55,7 @@ export class DetailsComponent implements OnInit {
   }
 
   submitDetails() {
-    this.indicator.setBusy(true);
+    //this.indicator.setBusy(true);
     this.userProfileService.setUserDetails(this.detailsForm.value);
   }
 }
