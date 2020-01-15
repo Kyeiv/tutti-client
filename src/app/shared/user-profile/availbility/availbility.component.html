@@ -44,7 +44,11 @@
               readonly
               [(ngModel)]="element.hourBegin"
             />
-            <ngx-material-timepicker color="primary" [hoursOnly]="true" #hourBeginCtrl></ngx-material-timepicker>
+            <ngx-material-timepicker
+              [cancelBtnTmpl]="cancelButton"
+              [hoursOnly]="true"
+              #hourBeginCtrl
+            ></ngx-material-timepicker>
           </mat-form-field>
         </ng-template>
       </td>
